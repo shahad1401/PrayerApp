@@ -21,7 +21,6 @@
         android:layout_weight="1"
         android:textSize="20sp"
         android:textAlignment="center"
-        android:text="@string/app_name"></TextView>
-
+        android:text="@string/AppName"></TextView>
 
 </LinearLayout>

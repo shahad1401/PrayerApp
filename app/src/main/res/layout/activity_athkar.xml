@@ -18,6 +18,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:text="@string/athkar"
+            android:textSize="50sp"
             android:gravity="center">
         </TextView>
     </LinearLayout>

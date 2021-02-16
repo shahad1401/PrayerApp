@@ -19,4 +19,13 @@
     <string name="register">Register</string>
     <string name="have_an_account">Have an accont ?</string>
     <string name="confirm_password">confirm password</string>
+    <string name="AppName">مواقيت الصلاة</string>
+    <string name="login_ar">تسجيل الدخول</string>
+    <string name="email_ar">البريد الإلكتروني</string>
+    <string name="password_ar">كلمة المرور</string>
+    <string name="account_ar">ليس لديك حساب ؟</string>
+    <string name="join_ar">إنضم إلينا</string>
+    <string name="c_pass_ar">تأكيد كلمة المرور</string>
+    <string name="register_ar">تسجيل</string>
+    <string name="have_an_account_ar">لديك حساب؟</string>
 </resources>
