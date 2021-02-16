@@ -1,0 +1,22 @@
+<resources>
+    <string name="app_name">PrayerApp</string>
+    <string name="home">Home</string>
+
+    <string name="menu_home">Home</string>
+    <string name="menu_gallery">Gallery</string>
+    <string name="menu_slideshow">Slideshow</string>
+    <string name="tasbeeh">تسبيح</string>
+    <string name="pTimes">أوقات الصلاة</string>
+    <string name="athkar">أذكار الصباح والمساء</string>
+    <string name="settings">الإعدادات</string>
+    <string name="dashboard">dashboard</string>
+    <string name="about_us">about us</string>
+    <string name="logout">logout</string>
+    <string name="enter_email">enter email</string>
+    <string name="enter_password">enter password</string>
+    <string name="login">login</string>
+    <string name="not_registered">Not Registered ?</string>
+    <string name="register">Register</string>
+    <string name="have_an_account">Have an accont ?</string>
+    <string name="confirm_password">confirm password</string>
+</resources>
