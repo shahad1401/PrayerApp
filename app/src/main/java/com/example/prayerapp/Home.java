@@ -1,25 +1,139 @@
 package com.example.prayerapp;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
+import android.Manifest;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.location.Address;
+import android.location.Geocoder;
+import android.location.Location;
 import android.os.Bundle;
+import android.text.Html;
+import android.util.Log;
 import android.view.View;
+import android.widget.Button;
+import android.widget.TextView;
+
+import com.google.android.gms.location.FusedLocationProviderClient;
+import com.google.android.gms.location.LocationServices;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+
+import java.io.IOException;
+import java.util.List;
+import java.util.Locale;
 
 public class Home extends AppCompatActivity {
+    //initialize variable
+    Button btLocation;
+    double lat, lang;
+    String country, locality, address;
+    TextView textView1,textView2,textView3,textView4,textView5;
+    FusedLocationProviderClient fusedLocationProviderClient;
     DrawerLayout drawerLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
+//assign variable
+        btLocation = findViewById(R.id.bt_location);
+        textView1 = findViewById(R.id.textView1);
+        textView2 = findViewById(R.id.textView2);
+        textView3 = findViewById(R.id.textView3);
+        //initialize fusedLocationProviderClient
+        fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this);
+        //__________________Did this my self so the location will be updated oninit ___________________________________
+        //check permission
+        if (ActivityCompat.checkSelfPermission(Home.this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
+            //when permission granted
+            getLocation();
+        } else {
+            //when permission denied
+            ActivityCompat.requestPermissions(Home.this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 44);
+        }
+
+
+        btLocation.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+//check permission
+                if (ActivityCompat.checkSelfPermission(Home.this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
+                    //when permission granted
+                    getLocation();
+                } else {
+                    //when permission denied
+                    ActivityCompat.requestPermissions(Home.this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 44);
+                }
+            }
+        });
+
 
         drawerLayout = findViewById(R.id.drawer_layout);
+    }
+
+    private void getLocation() {
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            // TODO: Consider calling
+            //    ActivityCompat#requestPermissions
+            // here to request the missing permissions, and then overriding
+            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+            //                                          int[] grantResults)
+            // to handle the case where the user grants the permission. See the documentation
+            // for ActivityCompat#requestPermissions for more details.
+            return;
+        }
+        fusedLocationProviderClient.getLastLocation().addOnCompleteListener(new OnCompleteListener<Location>() {
+            @Override
+            public void onComplete(@NonNull Task<Location> task) {
+                //initialize location
+                Location location = task.getResult();
+                if (location != null) {
+                    try {
+                        //initialize geoCoder
+                        Geocoder geocoder = new Geocoder(Home.this, Locale.getDefault());
+                        //initialize address list
+                        List<Address> addresses = geocoder.getFromLocation(
+                                location.getLatitude(), location.getLongitude(), 1);
+
+
+                        //Set Latitude on TextView
+                        lat= addresses.get(0).getLatitude();
+                        Log.i("Latitude",lat+"");
+
+                         //Set Longitude on TextView
+                        lang= addresses.get(0).getLongitude();
+                        Log.i("Longitude",lang+"");
+
+                        // Set CountryName on TextView
+                        country= addresses.get(0).getCountryName();
+                        Log.i("CountryName",country);
+                        textView1.setText("Country: "+ country);
+
+                        //Set Locality on TextView
+                        locality= addresses.get(0).getLocality();
+                        Log.i("Locality",locality);
+                        textView2.setText("Locality: "+ locality);
+
+                        //Set AddressLine on TextView
+                        address=addresses.get(0).getAddressLine(0);
+                        Log.i("AddressLine",address);
+                        textView3.setText("Address: "+ address);
+
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+        });
     }
 
     public void clickMenu(View view){
