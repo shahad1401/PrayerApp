@@ -20,7 +20,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="162dp"
-
+            android:background="#ECECEC"
             android:gravity="center_horizontal"
             android:orientation="vertical"
             android:padding="16dp">
@@ -49,15 +49,51 @@
                 android:layout_height="wrap_content"
                 android:text="Get Location" />
         </LinearLayout>
-
-
         <TextView
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
             android:text="@string/pTimes"
-            android:textSize="50sp"
-            android:gravity="center">
-        </TextView>
+            android:textSize="50sp"></TextView>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="115dp"
+            android:gravity="center_horizontal"
+            android:orientation="vertical"
+            >
+            <TextView
+                android:id="@+id/fajr"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="TextView" />
+            <TextView
+                android:id="@+id/duhr"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="TextView" />
+
+            <TextView
+                android:id="@+id/asr"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="TextView" />
+
+            <TextView
+                android:id="@+id/maghrb"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="TextView" />
+
+            <TextView
+                android:id="@+id/isha"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="TextView" />
+
+
+        </LinearLayout>
+
+
 
     </LinearLayout>
 

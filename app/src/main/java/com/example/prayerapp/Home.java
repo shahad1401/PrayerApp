@@ -28,6 +28,9 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
@@ -36,10 +39,10 @@ public class Home extends AppCompatActivity {
     Button btLocation;
     double lat, lang;
     String country, locality, address;
-    TextView textView1,textView2,textView3,textView4,textView5;
+    TextView textView1,textView2,textView3,fajr,duhr, asr, maghrb,isha;
     FusedLocationProviderClient fusedLocationProviderClient;
     DrawerLayout drawerLayout;
-
+String[] prayer;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -49,6 +52,12 @@ public class Home extends AppCompatActivity {
         textView1 = findViewById(R.id.textView1);
         textView2 = findViewById(R.id.textView2);
         textView3 = findViewById(R.id.textView3);
+        fajr = findViewById(R.id.fajr);
+        duhr = findViewById(R.id.duhr);
+        asr = findViewById(R.id.asr);
+        duhr = findViewById(R.id.duhr);
+        maghrb = findViewById(R.id.maghrb);
+        isha = findViewById(R.id.isha);
         //initialize fusedLocationProviderClient
         fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this);
         //__________________Did this my self so the location will be updated oninit ___________________________________
@@ -76,8 +85,45 @@ public class Home extends AppCompatActivity {
             }
         });
 
-
+prayersTime();
         drawerLayout = findViewById(R.id.drawer_layout);
+    }
+
+    private void prayersTime() {
+        PrayTime prayers = new PrayTime();
+
+        prayers.setTimeFormat(1); // 12
+        prayers.setCalcMethod(4); //um alqora
+        Log.i("calc method",prayers.getCalcMethod()+"");
+        prayers.setAsrJuristic(0); // Shafii (standard)
+        Log.i("AsrJuristic method",prayers.getAsrJuristic()+"");
+        prayers.setAdjustHighLats(0); //none
+        Log.i("AdjustHighLats method",prayers.getAdjustHighLats()+"");
+        int[] offsets = {0, 0, 0, 0, 0, 0, 0}; // {Fajr,Sunrise,Dhuhr,Asr,Sunset,Maghrib,Isha}
+        prayers.tune(offsets);
+
+        Date now = new Date();
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(now);
+       //double timezone=prayers.getBaseTimeZone(); //This gets the time zone right but the prayer times are wrong
+        prayers.setTimeZone(3);
+        double timezone=prayers.getTimeZone();
+        Log.i("timezone",timezone+"");
+
+        ArrayList<String> prayerTimes = prayers.getPrayerTimes(cal, lat, lang, timezone);
+        ArrayList<String> prayerNames = prayers.getTimeNames();
+
+        for (int i = 0; i < prayerTimes.size(); i++) {
+            System.out.println(prayerNames.get(i) + " - " + prayerTimes.get(i));
+           // prayer[i]= prayerTimes.get(i);
+        }
+        //setting the values on the screen
+        fajr.setText(prayerNames.get(0)+": "+ prayerTimes.get(0));
+        duhr.setText(prayerNames.get(2)+": "+ prayerTimes.get(2));
+        asr.setText(prayerNames.get(3)+": "+ prayerTimes.get(3));
+        maghrb.setText(prayerNames.get(5)+": "+ prayerTimes.get(5));
+        isha.setText(prayerNames.get(6)+": "+ prayerTimes.get(6));
+        //Log.i("duhr",prayerNames.get(0)+": "+ prayerTimes.get(0));
     }
 
     private void getLocation() {
