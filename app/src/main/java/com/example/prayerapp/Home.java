@@ -105,11 +105,9 @@ prayersTime();
         Date now = new Date();
         Calendar cal = Calendar.getInstance();
         cal.setTime(now);
-       //double timezone=prayers.getBaseTimeZone(); //This gets the time zone right but the prayer times are wrong
-        prayers.setTimeZone(3);
-        double timezone=prayers.getTimeZone();
+       double timezone=prayers.getBaseTimeZone();
         Log.i("timezone",timezone+"");
-
+        Log.i("lat,lang",lat+", "+lang+"");
         ArrayList<String> prayerTimes = prayers.getPrayerTimes(cal, lat, lang, timezone);
         ArrayList<String> prayerNames = prayers.getTimeNames();
 
@@ -173,7 +171,7 @@ prayersTime();
                         address=addresses.get(0).getAddressLine(0);
                         Log.i("AddressLine",address);
                         textView3.setText("Address: "+ address);
-
+                        prayersTime();
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
