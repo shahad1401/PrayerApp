@@ -28,4 +28,6 @@
     <string name="c_pass_ar">تأكيد كلمة المرور</string>
     <string name="register_ar">تسجيل</string>
     <string name="have_an_account_ar">لديك حساب؟</string>
+    <string name="nightathkar">أذكار المساء</string>
+    <string name="moriningathkar">أذكار الصباح</string>
 </resources>
