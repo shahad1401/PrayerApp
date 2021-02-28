@@ -34,6 +34,7 @@
             android:layout_width="265dp"
             android:layout_height="wrap_content"
             android:text="@string/nightathkar"
+            android:onClick="clickNight"
             android:textSize="25sp"/>
     </LinearLayout>
 

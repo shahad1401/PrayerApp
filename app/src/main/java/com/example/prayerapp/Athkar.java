@@ -42,6 +42,9 @@ public class Athkar extends AppCompatActivity {
     public void clickMorining(View view){
         Home.redirectActivity(this,morningAthkar.class);
     }
+    public void clickNight(View view){
+        Home.redirectActivity(this,nightAthkar.class);
+    }
     protected void onPause() {
         super.onPause();
         Home.closeDrawer(drawerLayout);
