@@ -30,4 +30,6 @@
     <string name="have_an_account_ar">لديك حساب؟</string>
     <string name="nightathkar">أذكار المساء</string>
     <string name="moriningathkar">أذكار الصباح</string>
+    <string name="back">السابق</string>
+    <string name="next">التالي</string>
 </resources>

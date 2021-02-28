@@ -39,7 +39,9 @@ public class Athkar extends AppCompatActivity {
     public void logout(View view){
         Home.logout(this);
     }
-
+    public void clickMorining(View view){
+        Home.redirectActivity(this,morningAthkar.class);
+    }
     protected void onPause() {
         super.onPause();
         Home.closeDrawer(drawerLayout);
