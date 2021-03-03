@@ -35,11 +35,21 @@ import java.util.List;
 import java.util.Locale;
 
 public class Home extends AppCompatActivity {
+
+    public static int timeformat , calcMethod, asrMethod;
     //initialize variable
     Button btLocation;
-    double lat, lang;
+    static double lat;
+    static double lang;
     String country, locality, address;
-    TextView textView1,textView2,textView3,fajr,duhr, asr, maghrb,isha;
+    TextView textView1;
+    TextView textView2;
+    TextView textView3;
+    static TextView fajr;
+    static TextView duhr;
+    static TextView asr;
+    static TextView maghrb;
+    static TextView isha;
     FusedLocationProviderClient fusedLocationProviderClient;
     DrawerLayout drawerLayout;
 String[] prayer;
@@ -85,17 +95,17 @@ String[] prayer;
             }
         });
 
-prayersTime();
+prayersTime(calcMethod,asrMethod,timeformat);
         drawerLayout = findViewById(R.id.drawer_layout);
     }
 
-    private void prayersTime() {
+    public static void prayersTime(int timeformat, int calcmethod, int asrMethod) {
         PrayTime prayers = new PrayTime();
 
-        prayers.setTimeFormat(1); // 12
-        prayers.setCalcMethod(4); //um alqora
+        prayers.setTimeFormat(1); // 12 (1)
+        prayers.setCalcMethod(4); //um alqora 4
         Log.i("calc method",prayers.getCalcMethod()+"");
-        prayers.setAsrJuristic(0); // Shafii (standard)
+        prayers.setAsrJuristic(0); // Shafii (standard) (0)
         Log.i("AsrJuristic method",prayers.getAsrJuristic()+"");
         prayers.setAdjustHighLats(0); //none
         Log.i("AdjustHighLats method",prayers.getAdjustHighLats()+"");
@@ -171,7 +181,7 @@ prayersTime();
                         address=addresses.get(0).getAddressLine(0);
                         Log.i("AddressLine",address);
                         textView3.setText("Address: "+ address);
-                        prayersTime();
+                        prayersTime(calcMethod,asrMethod,timeformat);
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
@@ -214,12 +224,16 @@ prayersTime();
         logout(this);
     }
 
+    public void clickSetting(View view){
+        redirectActivity(this , setting.class );
+    }
+
     public static void logout(final Activity activity) {
         AlertDialog.Builder builder = new AlertDialog.Builder(activity);
-        builder.setTitle("Logout");
-        builder.setMessage("r u sure u want to log out?");
+        builder.setTitle("تسجيل الخروج");
+        builder.setMessage("هل تريد تسجيل الخروج؟");
 
-        builder.setPositiveButton("YES", new DialogInterface.OnClickListener() {
+        builder.setPositiveButton("نعم", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
                 activity.finishAffinity();
@@ -227,7 +241,7 @@ prayersTime();
             }
         });
 
-        builder.setNegativeButton("NOOOH", new DialogInterface.OnClickListener() {
+        builder.setNegativeButton("لا", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int i) {
                 dialog.dismiss();

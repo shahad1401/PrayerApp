@@ -71,7 +71,9 @@ public class morningAthkar extends AppCompatActivity {
     public void clickAboutUs(View view){
         Home.redirectActivity(this,Athkar.class);
     }
-
+    public void clickSetting(View view){
+        Home.redirectActivity(this, setting.class );
+    }
     public void logout(View view){
         Home.logout(this);
     }

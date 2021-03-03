@@ -40,6 +40,10 @@ public class Tasbeh extends AppCompatActivity {
         Home.logout(this);
     }
 
+    public void clickSetting(View view){
+        Home.redirectActivity(this, setting.class );
+    }
+
     protected void onPause() {
         super.onPause();
         Home.closeDrawer(drawerLayout);

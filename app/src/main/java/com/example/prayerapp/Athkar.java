@@ -35,7 +35,9 @@ public class Athkar extends AppCompatActivity {
     public void clickAboutUs(View view){
         recreate();
     }
-
+    public void clickSetting(View view){
+        Home.redirectActivity(this, setting.class );
+    }
     public void logout(View view){
         Home.logout(this);
     }
