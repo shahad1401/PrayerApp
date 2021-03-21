@@ -3,6 +3,8 @@ package com.example.prayerapp;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.drawerlayout.widget.DrawerLayout;
 
+import android.content.Context;
+import android.media.AudioManager;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -11,7 +13,8 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.Toast;
-
+import android.widget.Switch;
+import android.widget.CompoundButton;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -39,6 +42,24 @@ public class setting extends AppCompatActivity {
                 android.R.layout.simple_spinner_item, list);
         dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner1.setAdapter(dataAdapter);
+        //Switch declerations
+        Switch silentSwitch = (Switch) findViewById(R.id.on_off_switch);
+
+        silentSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                AudioManager am;
+                am= (AudioManager) getBaseContext().getSystemService(Context.AUDIO_SERVICE);
+                    if (isChecked){
+                            //For Silent mode
+                        am.setRingerMode(AudioManager.RINGER_MODE_SILENT);
+                        //Toast.makeText(this,"here",1000).show();
+                        }
+                    else
+                        //For Normal mode
+                        am.setRingerMode(AudioManager.RINGER_MODE_NORMAL);
+
+            }
+        });
 
         spinner1.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override

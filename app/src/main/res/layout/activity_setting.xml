@@ -54,11 +54,19 @@
             android:layout_width="match_parent"
             android:layout_height="66dp" />
 
+        <Switch
+            android:id="@+id/on_off_switch"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="الوضع الصامت"
+            android:textOff="OFF"
+            android:textOn="ON"/>
         <Button
             android:id="@+id/btnSubmit"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="حفظ التعديلات"
             android:onClick="ChangeMethod"/>
+
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
