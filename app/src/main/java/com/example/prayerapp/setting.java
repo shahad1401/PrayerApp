@@ -3,8 +3,11 @@ package com.example.prayerapp;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.drawerlayout.widget.DrawerLayout;
 
+import android.app.NotificationManager;
 import android.content.Context;
+import android.content.Intent;
 import android.media.AudioManager;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -20,7 +23,7 @@ import java.util.List;
 
 public class setting extends AppCompatActivity {
     DrawerLayout drawerLayout;
-   Spinner spinner1, spinner2, spinner3;
+   Spinner spinner1, spinner2, spinner3,spinner4;
    Button btnSubmit;
   public static int calcMethod, asrMethod,timeMethod;
     @Override
@@ -29,6 +32,7 @@ public class setting extends AppCompatActivity {
         setContentView(R.layout.activity_setting);
         drawerLayout = findViewById(R.id.drawer_layout);
         btnSubmit=findViewById(R.id.btnSubmit);
+        //Create Spinner 1
         spinner1 = (Spinner) findViewById(R.id.spinner1);
         List<String> list = new ArrayList<String>();
         list.add("اثنى عشري");
@@ -42,27 +46,6 @@ public class setting extends AppCompatActivity {
                 android.R.layout.simple_spinner_item, list);
         dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner1.setAdapter(dataAdapter);
-
-
-//Switch declerations
-        Switch mySwitch = (Switch)findViewById(R.id.on_off_switch);
-        mySwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                AudioManager am;
-                am= (AudioManager) getBaseContext().getSystemService(Context.AUDIO_SERVICE);
-                if (isChecked) {
-                    am.setRingerMode(AudioManager.RINGER_MODE_SILENT);
-                    //do something when unchecked
-                }
-                else
-                    am.setRingerMode(AudioManager.RINGER_MODE_NORMAL);
-
-            }
-
-        });
-
-
 
         spinner1.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -128,9 +111,62 @@ public class setting extends AppCompatActivity {
      }
  });
 
-    }
+        spinner4 = (Spinner) findViewById(R.id.spinner4);
+        List<String> list4 = new ArrayList<String>();
+        list4.add("15 دقيقة");
+        list4.add("30 دقيقة");
+        list4.add("45 دقيقة");
+
+        ArrayAdapter<String> dataAdapter4 = new ArrayAdapter<String>(this,
+                android.R.layout.simple_spinner_item, list4);
+        dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinner4.setAdapter(dataAdapter4);
 
 
+        //Switch declerations
+        Switch mySwitch = (Switch)findViewById(R.id.on_off_switch);
+        mySwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+
+                Context context = getApplicationContext();
+                NotificationManager notificationManager =
+                        (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
+
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M
+                        && !notificationManager.isNotificationPolicyAccessGranted()) {
+
+                    Intent intent = new Intent(
+                            android.provider.Settings
+                                    .ACTION_NOTIFICATION_POLICY_ACCESS_SETTINGS);
+
+                    startActivity(intent);
+                }
+                AudioManager myAudioManager;
+                myAudioManager = (AudioManager)getSystemService(Context.AUDIO_SERVICE);
+
+                if (isChecked) {
+                    //For Silent
+                    myAudioManager.setRingerMode(AudioManager.RINGER_MODE_SILENT);
+
+                    Toast.makeText(getApplicationContext() , "text", Toast.LENGTH_LONG).show();
+
+                    //do something when unchecked
+                }
+                else
+                    myAudioManager.setRingerMode(AudioManager.RINGER_MODE_NORMAL);
+                Toast.makeText(getApplicationContext() , "else", Toast.LENGTH_LONG).show();
+
+            }
+
+        });
+
+
+    }//End on create
+
+
+
+    //Menu related methods
     public void clickMenu(View view){
         Home.openDrawer(drawerLayout);
     }
@@ -165,4 +201,4 @@ public class setting extends AppCompatActivity {
     public void ChangeMethod(View view) {
         Home.redirectActivity(this, Home.class);
     }
-}
+}//End class
