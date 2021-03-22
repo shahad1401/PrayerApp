@@ -93,8 +93,6 @@
 
         </LinearLayout>
 
-
-
     </LinearLayout>
 
     <RelativeLayout
@@ -106,6 +104,5 @@
         <include
             layout="@layout/main_nav_drawer"></include>
     </RelativeLayout>
-
 
 </androidx.drawerlayout.widget.DrawerLayout>
