@@ -1,0 +1,123 @@
+Index: app/src/main/res/values/strings.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><resources>\r\n    <string name=\"app_name\">PrayerApp</string>\r\n    <string name=\"home\">Home</string>\r\n\r\n    <string name=\"menu_home\">Home</string>\r\n    <string name=\"menu_gallery\">Gallery</string>\r\n    <string name=\"menu_slideshow\">Slideshow</string>\r\n    <string name=\"tasbeeh\">تسبيح</string>\r\n    <string name=\"pTimes\">أوقات الصلاة</string>\r\n    <string name=\"athkar\">أذكار الصباح والمساء</string>\r\n    <string name=\"settings\">الإعدادات</string>\r\n    <string name=\"dashboard\">dashboard</string>\r\n    <string name=\"about_us\">about us</string>\r\n    <string name=\"logout\">logout</string>\r\n    <string name=\"enter_email\">enter email</string>\r\n    <string name=\"enter_password\">enter password</string>\r\n    <string name=\"login\">login</string>\r\n    <string name=\"not_registered\">Not Registered ?</string>\r\n    <string name=\"register\">Register</string>\r\n    <string name=\"have_an_account\">Have an accont ?</string>\r\n    <string name=\"confirm_password\">confirm password</string>\r\n    <string name=\"AppName\">مواقيت الصلاة</string>\r\n    <string name=\"login_ar\">تسجيل الدخول</string>\r\n    <string name=\"email_ar\">البريد الإلكتروني</string>\r\n    <string name=\"password_ar\">كلمة المرور</string>\r\n    <string name=\"account_ar\">ليس لديك حساب ؟</string>\r\n    <string name=\"join_ar\">إنضم إلينا</string>\r\n    <string name=\"c_pass_ar\">تأكيد كلمة المرور</string>\r\n    <string name=\"register_ar\">تسجيل</string>\r\n    <string name=\"have_an_account_ar\">لديك حساب؟</string>\r\n    <string name=\"nightathkar\">أذكار المساء</string>\r\n    <string name=\"moriningathkar\">أذكار الصباح</string>\r\n    <string name=\"back\">السابق</string>\r\n    <string name=\"next\">التالي</string>\r\n</resources>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/res/values/strings.xml	(revision 33d020be0d765c837ec14b2e5db68a135b1b487b)
++++ app/src/main/res/values/strings.xml	(date 1616442520653)
+@@ -32,4 +32,14 @@
+     <string name="moriningathkar">أذكار الصباح</string>
+     <string name="back">السابق</string>
+     <string name="next">التالي</string>
++    <string name="calcway">طريقة حساب أوقات الصلاة:</string>
++    <string name="asrtime">طريقة حساب صلاة العصر:</string>
++    <string name="timedis">طريقة عرض الوقت:</string>
++    <string name="silentmode">الوضع الصامت</string>
++    <string name="submit">حفظ التعديلات</string>
++    <string name="tv">TextView</string>
++    <string name="tv1">TextView</string>
++    <string name="tv2">TextView</string>
++    <string name="tv3">TextView</string>
++    <string name="tv4">TextView</string>
+ </resources>
+\ No newline at end of file
+Index: app/src/main/res/layout/activity_home.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n<androidx.drawerlayout.widget.DrawerLayout xmlns:android=\"http://schemas.android.com/apk/res/android\"\r\n    xmlns:app=\"http://schemas.android.com/apk/res-auto\"\r\n    xmlns:tools=\"http://schemas.android.com/tools\"\r\n    android:layout_width=\"match_parent\"\r\n    android:layout_height=\"match_parent\"\r\n    android:id=\"@+id/drawer_layout\"\r\n    tools:context=\".Home\">\r\n\r\n    <LinearLayout\r\n        android:layout_width=\"match_parent\"\r\n        android:layout_height=\"match_parent\"\r\n        android:orientation=\"vertical\"\r\n        >\r\n\r\n        <include\r\n            layout=\"@layout/main_toolbar\"\r\n            />\r\n\r\n        <LinearLayout\r\n            android:layout_width=\"match_parent\"\r\n            android:layout_height=\"162dp\"\r\n            android:background=\"#ECECEC\"\r\n            android:gravity=\"center_horizontal\"\r\n            android:orientation=\"vertical\"\r\n            android:padding=\"16dp\">\r\n\r\n            <TextView\r\n                android:id=\"@+id/textView1\"\r\n                android:layout_width=\"150dp\"\r\n                android:layout_height=\"wrap_content\"\r\n                 />\r\n\r\n            <TextView\r\n                android:id=\"@+id/textView2\"\r\n                android:layout_width=\"150dp\"\r\n                android:layout_height=\"wrap_content\"\r\n                />\r\n\r\n            <TextView\r\n                android:id=\"@+id/textView3\"\r\n                android:layout_width=\"301dp\"\r\n                android:layout_height=\"wrap_content\"\r\n                 />\r\n\r\n            <Button\r\n                android:id=\"@+id/bt_location\"\r\n                android:layout_width=\"wrap_content\"\r\n                android:layout_height=\"wrap_content\"\r\n                android:text=\"Get Location\" />\r\n        </LinearLayout>\r\n        <TextView\r\n            android:layout_width=\"match_parent\"\r\n            android:layout_height=\"wrap_content\"\r\n            android:gravity=\"center\"\r\n            android:text=\"@string/pTimes\"\r\n            android:textSize=\"50sp\"></TextView>\r\n        <LinearLayout\r\n            android:layout_width=\"match_parent\"\r\n            android:layout_height=\"115dp\"\r\n            android:gravity=\"center_horizontal\"\r\n            android:orientation=\"vertical\"\r\n            >\r\n            <TextView\r\n                android:id=\"@+id/fajr\"\r\n                android:layout_width=\"match_parent\"\r\n                android:layout_height=\"wrap_content\"\r\n                android:text=\"TextView\" />\r\n            <TextView\r\n                android:id=\"@+id/duhr\"\r\n                android:layout_width=\"match_parent\"\r\n                android:layout_height=\"wrap_content\"\r\n                android:text=\"TextView\" />\r\n\r\n            <TextView\r\n                android:id=\"@+id/asr\"\r\n                android:layout_width=\"match_parent\"\r\n                android:layout_height=\"wrap_content\"\r\n                android:text=\"TextView\" />\r\n\r\n            <TextView\r\n                android:id=\"@+id/maghrb\"\r\n                android:layout_width=\"match_parent\"\r\n                android:layout_height=\"wrap_content\"\r\n                android:text=\"TextView\" />\r\n\r\n            <TextView\r\n                android:id=\"@+id/isha\"\r\n                android:layout_width=\"match_parent\"\r\n                android:layout_height=\"wrap_content\"\r\n                android:text=\"TextView\" />\r\n\r\n\r\n        </LinearLayout>\r\n\r\n\r\n\r\n    </LinearLayout>\r\n\r\n    <RelativeLayout\r\n        android:layout_width=\"300dp\"\r\n        android:layout_height=\"match_parent\"\r\n        android:layout_gravity=\"start\"\r\n        android:background=\"@color/white\">\r\n\r\n        <include\r\n            layout=\"@layout/main_nav_drawer\"></include>\r\n    </RelativeLayout>\r\n\r\n\r\n</androidx.drawerlayout.widget.DrawerLayout>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/res/layout/activity_home.xml	(revision 33d020be0d765c837ec14b2e5db68a135b1b487b)
++++ app/src/main/res/layout/activity_home.xml	(date 1616442520666)
+@@ -65,30 +65,30 @@
+                 android:id="@+id/fajr"
+                 android:layout_width="match_parent"
+                 android:layout_height="wrap_content"
+-                android:text="TextView" />
++                android:text="@string/tv" />
+             <TextView
+                 android:id="@+id/duhr"
+                 android:layout_width="match_parent"
+                 android:layout_height="wrap_content"
+-                android:text="TextView" />
++                android:text="@string/tv1" />
+ 
+             <TextView
+                 android:id="@+id/asr"
+                 android:layout_width="match_parent"
+                 android:layout_height="wrap_content"
+-                android:text="TextView" />
++                android:text="@string/tv2" />
+ 
+             <TextView
+                 android:id="@+id/maghrb"
+                 android:layout_width="match_parent"
+                 android:layout_height="wrap_content"
+-                android:text="TextView" />
++                android:text="@string/tv3" />
+ 
+             <TextView
+                 android:id="@+id/isha"
+                 android:layout_width="match_parent"
+                 android:layout_height="wrap_content"
+-                android:text="TextView" />
++                android:text="@string/tv4" />
+ 
+ 
+         </LinearLayout>
+Index: app/src/main/res/layout/activity_setting.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n<androidx.constraintlayout.widget.ConstraintLayout xmlns:android=\"http://schemas.android.com/apk/res/android\"\r\n    xmlns:app=\"http://schemas.android.com/apk/res-auto\"\r\n    xmlns:tools=\"http://schemas.android.com/tools\"\r\n    android:layout_width=\"match_parent\"\r\n    android:layout_height=\"match_parent\"\r\n    tools:context=\".setting\">\r\n\r\n    <include\r\n        android:id=\"@+id/include\"\r\n        layout=\"@layout/main_toolbar\" />\r\n\r\n    <LinearLayout\r\n        android:layout_width=\"match_parent\"\r\n        android:layout_height=\"680dp\"\r\n        android:gravity=\"center_horizontal\"\r\n        android:orientation=\"vertical\"\r\n        android:layout_marginTop=\"35px\"\r\n        android:layout_marginRight=\"35px\"\r\n        app:layout_constraintTop_toBottomOf=\"@+id/include\">\r\n\r\n        <TextView\r\n            android:layout_width=\"match_parent\"\r\n            android:layout_height=\"wrap_content\"\r\n            android:gravity=\"right\"\r\n            android:text=\"طريقة حساب أوقات الصلاة:\"\r\n            android:layout_marginTop=\"35px\"\r\n            android:textSize=\"15sp\"></TextView>\r\n\r\n        <Spinner\r\n            android:id=\"@+id/spinner1\"\r\n            android:layout_width=\"match_parent\"\r\n            android:layout_height=\"66dp\" />\r\n        <TextView\r\n            android:layout_width=\"match_parent\"\r\n            android:layout_height=\"wrap_content\"\r\n            android:gravity=\"right\"\r\n            android:text=\"طريقة حساب صلاة العصر:\"\r\n            android:layout_marginTop=\"35px\"\r\n            android:textSize=\"15sp\"></TextView>\r\n        <Spinner\r\n            android:id=\"@+id/spinner2\"\r\n            android:layout_width=\"match_parent\"\r\n            android:layout_height=\"66dp\" />\r\n        <TextView\r\n            android:layout_width=\"match_parent\"\r\n            android:layout_height=\"wrap_content\"\r\n            android:gravity=\"right\"\r\n            android:text=\"طريقة عرض الوقت:\"\r\n            android:layout_marginTop=\"35px\"\r\n            android:textSize=\"15sp\"></TextView>\r\n        <Spinner\r\n            android:id=\"@+id/spinner3\"\r\n            android:layout_width=\"match_parent\"\r\n            android:layout_height=\"66dp\" />\r\n\r\n\r\n        <TextView\r\n            android:layout_width=\"match_parent\"\r\n            android:layout_height=\"wrap_content\"\r\n            android:gravity=\"right\"\r\n            android:text=\"الوضع الصامت:\"\r\n            android:layout_marginTop=\"35px\"\r\n            android:textSize=\"15sp\"/>\r\n\r\n        <Spinner\r\n            android:id=\"@+id/spinner4\"\r\n            android:layout_width=\"match_parent\"\r\n            android:layout_height=\"66dp\" />\r\n\r\n        <Switch\r\n            android:id=\"@+id/on_off_switch\"\r\n            android:layout_width=\"wrap_content\"\r\n            android:layout_height=\"wrap_content\"\r\n            android:text=\"الوضع الصامت\"\r\n            android:textOff=\"OFF\"\r\n            android:textOn=\"ON\"/>\r\n        <Button\r\n            android:id=\"@+id/btnSubmit\"\r\n            android:layout_width=\"wrap_content\"\r\n            android:layout_height=\"wrap_content\"\r\n            android:text=\"حفظ التعديلات\"\r\n            android:onClick=\"ChangeMethod\"/>\r\n\r\n    </LinearLayout>\r\n</androidx.constraintlayout.widget.ConstraintLayout>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/res/layout/activity_setting.xml	(revision 33d020be0d765c837ec14b2e5db68a135b1b487b)
++++ app/src/main/res/layout/activity_setting.xml	(date 1616442520680)
+@@ -23,7 +23,7 @@
+             android:layout_width="match_parent"
+             android:layout_height="wrap_content"
+             android:gravity="right"
+-            android:text="طريقة حساب أوقات الصلاة:"
++            android:text="@string/calcway"
+             android:layout_marginTop="35px"
+             android:textSize="15sp"></TextView>
+ 
+@@ -35,7 +35,7 @@
+             android:layout_width="match_parent"
+             android:layout_height="wrap_content"
+             android:gravity="right"
+-            android:text="طريقة حساب صلاة العصر:"
++            android:text="@string/asrtime"
+             android:layout_marginTop="35px"
+             android:textSize="15sp"></TextView>
+         <Spinner
+@@ -46,7 +46,7 @@
+             android:layout_width="match_parent"
+             android:layout_height="wrap_content"
+             android:gravity="right"
+-            android:text="طريقة عرض الوقت:"
++            android:text="@string/timedis"
+             android:layout_marginTop="35px"
+             android:textSize="15sp"></TextView>
+         <Spinner
+@@ -72,14 +72,14 @@
+             android:id="@+id/on_off_switch"
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content"
+-            android:text="الوضع الصامت"
++            android:text="@string/silentmode"
+             android:textOff="OFF"
+             android:textOn="ON"/>
+         <Button
+             android:id="@+id/btnSubmit"
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content"
+-            android:text="حفظ التعديلات"
++            android:text="@string/submit"
+             android:onClick="ChangeMethod"/>
+ 
+     </LinearLayout>

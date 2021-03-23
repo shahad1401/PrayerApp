@@ -32,4 +32,14 @@
     <string name="moriningathkar">أذكار الصباح</string>
     <string name="back">السابق</string>
     <string name="next">التالي</string>
+    <string name="calcway">طريقة حساب أوقات الصلاة:</string>
+    <string name="asrtime">الحساب الفقهي صلاة العصر:</string>
+    <string name="timedis">طريقة عرض الوقت:</string>
+    <string name="silentmode">الوضع الصامت</string>
+    <string name="submit">حفظ التعديلات</string>
+    <string name="tv">TextView</string>
+    <string name="tv1">TextView</string>
+    <string name="tv2">TextView</string>
+    <string name="tv3">TextView</string>
+    <string name="tv4">TextView</string>
 </resources>

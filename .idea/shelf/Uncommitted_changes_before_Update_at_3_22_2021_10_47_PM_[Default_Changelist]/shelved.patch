@@ -1,0 +1,140 @@
+Index: app/src/main/java/com/example/prayerapp/setting.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.example.prayerapp;\r\n\r\nimport androidx.appcompat.app.AppCompatActivity;\r\nimport androidx.drawerlayout.widget.DrawerLayout;\r\n\r\nimport android.content.Context;\r\nimport android.media.AudioManager;\r\nimport android.os.Bundle;\r\nimport android.util.Log;\r\nimport android.view.View;\r\nimport android.widget.AdapterView;\r\nimport android.widget.ArrayAdapter;\r\nimport android.widget.Button;\r\nimport android.widget.Spinner;\r\nimport android.widget.Toast;\r\nimport android.widget.Switch;\r\nimport android.widget.CompoundButton;\r\nimport java.util.ArrayList;\r\nimport java.util.List;\r\n\r\npublic class setting extends AppCompatActivity {\r\n    DrawerLayout drawerLayout;\r\n   Spinner spinner1, spinner2, spinner3;\r\n   Button btnSubmit;\r\n  public static int calcMethod, asrMethod,timeMethod;\r\n    @Override\r\n    protected void onCreate(Bundle savedInstanceState) {\r\n        super.onCreate(savedInstanceState);\r\n        setContentView(R.layout.activity_setting);\r\n        drawerLayout = findViewById(R.id.drawer_layout);\r\n        btnSubmit=findViewById(R.id.btnSubmit);\r\n        spinner1 = (Spinner) findViewById(R.id.spinner1);\r\n        List<String> list = new ArrayList<String>();\r\n        list.add(\"اثنى عشري\");\r\n        list.add(\"جامعه العلوم الإسلامية بكراتشي\");\r\n        list.add(\"الإتحاد الإسلامي بأمريكا الشمالية\");\r\n        list.add(\"رابطة العالم الإسلامي\");\r\n        list.add(\"أم القرى\");\r\n        list.add(\"الهيئه المصرية االعامة للمساحه\");\r\n        list.add(\"معهد الجيوفيزياء بجامعة طهران\");\r\n        ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(this,\r\n                android.R.layout.simple_spinner_item, list);\r\n        dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);\r\n        spinner1.setAdapter(dataAdapter);\r\n        //Switch declerations\r\n        Switch silentSwitch = (Switch) findViewById(R.id.on_off_switch);\r\n\r\n        silentSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {\r\n            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {\r\n                AudioManager am;\r\n                am= (AudioManager) getBaseContext().getSystemService(Context.AUDIO_SERVICE);\r\n                    if (isChecked){\r\n                            //For Silent mode\r\n                        am.setRingerMode(AudioManager.RINGER_MODE_SILENT);\r\n                        //Toast.makeText(this,\"here\",1000).show();\r\n                        }\r\n                    else\r\n                        //For Normal mode\r\n                        am.setRingerMode(AudioManager.RINGER_MODE_NORMAL);\r\n\r\n            }\r\n        });\r\n\r\n        spinner1.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {\r\n            @Override\r\n            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {\r\n                calcMethod= (int) spinner1.getSelectedItemId();\r\n                Log.i(\"calc method\",calcMethod+\"\");\r\n                Home.calcMethod=calcMethod;\r\n\r\n            }\r\n\r\n            @Override\r\n            public void onNothingSelected(AdapterView<?> parent) {\r\n                Home.calcMethod=4;\r\n            }\r\n        });\r\n\r\n        spinner2 = (Spinner) findViewById(R.id.spinner2);\r\n        List<String> list2 = new ArrayList<String>();\r\n        list2.add(\"شافعي\");\r\n        list2.add(\"حنفي\");\r\n\r\n        ArrayAdapter<String> dataAdapter2 = new ArrayAdapter<String>(this,\r\n                android.R.layout.simple_spinner_item, list2);\r\n        dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);\r\n        spinner2.setAdapter(dataAdapter2);\r\n\r\n        spinner2.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {\r\n            @Override\r\n            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {\r\n                asrMethod= (int) spinner1.getSelectedItemId();\r\n                Log.i(\"asr method\",asrMethod+\"\");\r\n                Home.asrMethod=asrMethod;\r\n            }\r\n\r\n            @Override\r\n            public void onNothingSelected(AdapterView<?> parent) {\r\n                Home.asrMethod=0;\r\n            }\r\n        });\r\n\r\n         spinner3 = (Spinner) findViewById(R.id.spinner3);\r\n        List<String> list3 = new ArrayList<String>();\r\n        list3.add(\"24 ساعة\");\r\n        list3.add(\"12 ساعة\");\r\n\r\n\r\n        ArrayAdapter<String> dataAdapter3 = new ArrayAdapter<String>(this,\r\n                android.R.layout.simple_spinner_item, list3);\r\n        dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);\r\n        spinner3.setAdapter(dataAdapter3);\r\n spinner3.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {\r\n     @Override\r\n     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {\r\n         timeMethod= (int) spinner1.getSelectedItemId();\r\n         Log.i(\"time method\",timeMethod+\"\");\r\n         Home.timeformat=timeMethod;\r\n\r\n     }\r\n\r\n     @Override\r\n     public void onNothingSelected(AdapterView<?> parent) {\r\n         Home.timeformat=1;\r\n     }\r\n });\r\n\r\n    }\r\n\r\n\r\n    public void clickMenu(View view){\r\n        Home.openDrawer(drawerLayout);\r\n    }\r\n\r\n    public void clickLogo(View view){\r\n        Home.closeDrawer(drawerLayout);\r\n    }\r\n\r\n    public void clickHome(View view){\r\n        Home.redirectActivity(this, Home.class);\r\n    }\r\n\r\n    public void clickDashboard(View view){\r\n        Home.redirectActivity(this , Tasbeh.class);\r\n    }\r\n\r\n    public void clickAboutUs(View view){\r\n        Home.redirectActivity(this, Athkar.class);\r\n    }\r\n\r\n    public void logout(View view){\r\n        Home.logout(this);\r\n    }\r\n\r\n    public void clickSetting(View view){ recreate(); }\r\n\r\n    protected void onPause() {\r\n        super.onPause();\r\n        Home.closeDrawer(drawerLayout);\r\n    }\r\n\r\n    public void ChangeMethod(View view) {\r\n        Home.redirectActivity(this, Home.class);\r\n    }\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/java/com/example/prayerapp/setting.java	(revision 9c9cf6595b1186c6ce224e68bbae3fb164c08f2a)
++++ app/src/main/java/com/example/prayerapp/setting.java	(date 1616357077593)
+@@ -53,6 +53,7 @@
+                             //For Silent mode
+                         am.setRingerMode(AudioManager.RINGER_MODE_SILENT);
+                         //Toast.makeText(this,"here",1000).show();
++                        //Log.i("calc method",am+"");
+                         }
+                     else
+                         //For Normal mode
+Index: app/src/main/res/values/strings.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><resources>\r\n    <string name=\"app_name\">PrayerApp</string>\r\n    <string name=\"home\">Home</string>\r\n\r\n    <string name=\"menu_home\">Home</string>\r\n    <string name=\"menu_gallery\">Gallery</string>\r\n    <string name=\"menu_slideshow\">Slideshow</string>\r\n    <string name=\"tasbeeh\">تسبيح</string>\r\n    <string name=\"pTimes\">أوقات الصلاة</string>\r\n    <string name=\"athkar\">أذكار الصباح والمساء</string>\r\n    <string name=\"settings\">الإعدادات</string>\r\n    <string name=\"dashboard\">dashboard</string>\r\n    <string name=\"about_us\">about us</string>\r\n    <string name=\"logout\">logout</string>\r\n    <string name=\"enter_email\">enter email</string>\r\n    <string name=\"enter_password\">enter password</string>\r\n    <string name=\"login\">login</string>\r\n    <string name=\"not_registered\">Not Registered ?</string>\r\n    <string name=\"register\">Register</string>\r\n    <string name=\"have_an_account\">Have an accont ?</string>\r\n    <string name=\"confirm_password\">confirm password</string>\r\n    <string name=\"AppName\">مواقيت الصلاة</string>\r\n    <string name=\"login_ar\">تسجيل الدخول</string>\r\n    <string name=\"email_ar\">البريد الإلكتروني</string>\r\n    <string name=\"password_ar\">كلمة المرور</string>\r\n    <string name=\"account_ar\">ليس لديك حساب ؟</string>\r\n    <string name=\"join_ar\">إنضم إلينا</string>\r\n    <string name=\"c_pass_ar\">تأكيد كلمة المرور</string>\r\n    <string name=\"register_ar\">تسجيل</string>\r\n    <string name=\"have_an_account_ar\">لديك حساب؟</string>\r\n    <string name=\"nightathkar\">أذكار المساء</string>\r\n    <string name=\"moriningathkar\">أذكار الصباح</string>\r\n    <string name=\"back\">السابق</string>\r\n    <string name=\"next\">التالي</string>\r\n</resources>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/res/values/strings.xml	(revision 9c9cf6595b1186c6ce224e68bbae3fb164c08f2a)
++++ app/src/main/res/values/strings.xml	(date 1616357369438)
+@@ -32,4 +32,14 @@
+     <string name="moriningathkar">أذكار الصباح</string>
+     <string name="back">السابق</string>
+     <string name="next">التالي</string>
++    <string name="calcway">طريقة حساب أوقات الصلاة:</string>
++    <string name="asrtime">طريقة حساب صلاة العصر:</string>
++    <string name="timedis">طريقة عرض الوقت:</string>
++    <string name="silentmode">الوضع الصامت</string>
++    <string name="submit">حفظ التعديلات</string>
++    <string name="tv">TextView</string>
++    <string name="tv1">TextView</string>
++    <string name="tv2">TextView</string>
++    <string name="tv3">TextView</string>
++    <string name="tv4">TextView</string>
+ </resources>
+\ No newline at end of file
+Index: app/src/main/res/layout/activity_home.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n<androidx.drawerlayout.widget.DrawerLayout xmlns:android=\"http://schemas.android.com/apk/res/android\"\r\n    xmlns:app=\"http://schemas.android.com/apk/res-auto\"\r\n    xmlns:tools=\"http://schemas.android.com/tools\"\r\n    android:layout_width=\"match_parent\"\r\n    android:layout_height=\"match_parent\"\r\n    android:id=\"@+id/drawer_layout\"\r\n    tools:context=\".Home\">\r\n\r\n    <LinearLayout\r\n        android:layout_width=\"match_parent\"\r\n        android:layout_height=\"match_parent\"\r\n        android:orientation=\"vertical\"\r\n        >\r\n\r\n        <include\r\n            layout=\"@layout/main_toolbar\"\r\n            />\r\n\r\n        <LinearLayout\r\n            android:layout_width=\"match_parent\"\r\n            android:layout_height=\"162dp\"\r\n            android:background=\"#ECECEC\"\r\n            android:gravity=\"center_horizontal\"\r\n            android:orientation=\"vertical\"\r\n            android:padding=\"16dp\">\r\n\r\n            <TextView\r\n                android:id=\"@+id/textView1\"\r\n                android:layout_width=\"150dp\"\r\n                android:layout_height=\"wrap_content\"\r\n                 />\r\n\r\n            <TextView\r\n                android:id=\"@+id/textView2\"\r\n                android:layout_width=\"150dp\"\r\n                android:layout_height=\"wrap_content\"\r\n                />\r\n\r\n            <TextView\r\n                android:id=\"@+id/textView3\"\r\n                android:layout_width=\"301dp\"\r\n                android:layout_height=\"wrap_content\"\r\n                 />\r\n\r\n            <Button\r\n                android:id=\"@+id/bt_location\"\r\n                android:layout_width=\"wrap_content\"\r\n                android:layout_height=\"wrap_content\"\r\n                android:text=\"Get Location\" />\r\n        </LinearLayout>\r\n        <TextView\r\n            android:layout_width=\"match_parent\"\r\n            android:layout_height=\"wrap_content\"\r\n            android:gravity=\"center\"\r\n            android:text=\"@string/pTimes\"\r\n            android:textSize=\"50sp\"></TextView>\r\n        <LinearLayout\r\n            android:layout_width=\"match_parent\"\r\n            android:layout_height=\"115dp\"\r\n            android:gravity=\"center_horizontal\"\r\n            android:orientation=\"vertical\"\r\n            >\r\n            <TextView\r\n                android:id=\"@+id/fajr\"\r\n                android:layout_width=\"match_parent\"\r\n                android:layout_height=\"wrap_content\"\r\n                android:text=\"TextView\" />\r\n            <TextView\r\n                android:id=\"@+id/duhr\"\r\n                android:layout_width=\"match_parent\"\r\n                android:layout_height=\"wrap_content\"\r\n                android:text=\"TextView\" />\r\n\r\n            <TextView\r\n                android:id=\"@+id/asr\"\r\n                android:layout_width=\"match_parent\"\r\n                android:layout_height=\"wrap_content\"\r\n                android:text=\"TextView\" />\r\n\r\n            <TextView\r\n                android:id=\"@+id/maghrb\"\r\n                android:layout_width=\"match_parent\"\r\n                android:layout_height=\"wrap_content\"\r\n                android:text=\"TextView\" />\r\n\r\n            <TextView\r\n                android:id=\"@+id/isha\"\r\n                android:layout_width=\"match_parent\"\r\n                android:layout_height=\"wrap_content\"\r\n                android:text=\"TextView\" />\r\n\r\n\r\n        </LinearLayout>\r\n\r\n\r\n\r\n    </LinearLayout>\r\n\r\n    <RelativeLayout\r\n        android:layout_width=\"300dp\"\r\n        android:layout_height=\"match_parent\"\r\n        android:layout_gravity=\"start\"\r\n        android:background=\"@color/white\">\r\n\r\n        <include\r\n            layout=\"@layout/main_nav_drawer\"></include>\r\n    </RelativeLayout>\r\n\r\n\r\n</androidx.drawerlayout.widget.DrawerLayout>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/res/layout/activity_home.xml	(revision 9c9cf6595b1186c6ce224e68bbae3fb164c08f2a)
++++ app/src/main/res/layout/activity_home.xml	(date 1616357369450)
+@@ -65,30 +65,30 @@
+                 android:id="@+id/fajr"
+                 android:layout_width="match_parent"
+                 android:layout_height="wrap_content"
+-                android:text="TextView" />
++                android:text="@string/tv" />
+             <TextView
+                 android:id="@+id/duhr"
+                 android:layout_width="match_parent"
+                 android:layout_height="wrap_content"
+-                android:text="TextView" />
++                android:text="@string/tv1" />
+ 
+             <TextView
+                 android:id="@+id/asr"
+                 android:layout_width="match_parent"
+                 android:layout_height="wrap_content"
+-                android:text="TextView" />
++                android:text="@string/tv2" />
+ 
+             <TextView
+                 android:id="@+id/maghrb"
+                 android:layout_width="match_parent"
+                 android:layout_height="wrap_content"
+-                android:text="TextView" />
++                android:text="@string/tv3" />
+ 
+             <TextView
+                 android:id="@+id/isha"
+                 android:layout_width="match_parent"
+                 android:layout_height="wrap_content"
+-                android:text="TextView" />
++                android:text="@string/tv4" />
+ 
+ 
+         </LinearLayout>
+Index: app/src/main/res/layout/activity_setting.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n<androidx.constraintlayout.widget.ConstraintLayout xmlns:android=\"http://schemas.android.com/apk/res/android\"\r\n    xmlns:app=\"http://schemas.android.com/apk/res-auto\"\r\n    xmlns:tools=\"http://schemas.android.com/tools\"\r\n    android:layout_width=\"match_parent\"\r\n    android:layout_height=\"match_parent\"\r\n    tools:context=\".setting\">\r\n\r\n    <include\r\n        android:id=\"@+id/include\"\r\n        layout=\"@layout/main_toolbar\" />\r\n\r\n    <LinearLayout\r\n        android:layout_width=\"match_parent\"\r\n        android:layout_height=\"680dp\"\r\n        android:gravity=\"center_horizontal\"\r\n        android:orientation=\"vertical\"\r\n        android:layout_marginTop=\"35px\"\r\n        android:layout_marginRight=\"35px\"\r\n        app:layout_constraintTop_toBottomOf=\"@+id/include\">\r\n\r\n        <TextView\r\n            android:layout_width=\"match_parent\"\r\n            android:layout_height=\"wrap_content\"\r\n            android:gravity=\"right\"\r\n            android:text=\"طريقة حساب أوقات الصلاة:\"\r\n            android:layout_marginTop=\"35px\"\r\n            android:textSize=\"15sp\"></TextView>\r\n\r\n        <Spinner\r\n            android:id=\"@+id/spinner1\"\r\n            android:layout_width=\"match_parent\"\r\n            android:layout_height=\"66dp\" />\r\n        <TextView\r\n            android:layout_width=\"match_parent\"\r\n            android:layout_height=\"wrap_content\"\r\n            android:gravity=\"right\"\r\n            android:text=\"طريقة حساب صلاة العصر:\"\r\n            android:layout_marginTop=\"35px\"\r\n            android:textSize=\"15sp\"></TextView>\r\n        <Spinner\r\n            android:id=\"@+id/spinner2\"\r\n            android:layout_width=\"match_parent\"\r\n            android:layout_height=\"66dp\" />\r\n        <TextView\r\n            android:layout_width=\"match_parent\"\r\n            android:layout_height=\"wrap_content\"\r\n            android:gravity=\"right\"\r\n            android:text=\"طريقة عرض الوقت:\"\r\n            android:layout_marginTop=\"35px\"\r\n            android:textSize=\"15sp\"></TextView>\r\n        <Spinner\r\n            android:id=\"@+id/spinner3\"\r\n            android:layout_width=\"match_parent\"\r\n            android:layout_height=\"66dp\" />\r\n\r\n        <Switch\r\n            android:id=\"@+id/on_off_switch\"\r\n            android:layout_width=\"wrap_content\"\r\n            android:layout_height=\"wrap_content\"\r\n            android:text=\"الوضع الصامت\"\r\n            android:textOff=\"OFF\"\r\n            android:textOn=\"ON\"/>\r\n        <Button\r\n            android:id=\"@+id/btnSubmit\"\r\n            android:layout_width=\"wrap_content\"\r\n            android:layout_height=\"wrap_content\"\r\n            android:text=\"حفظ التعديلات\"\r\n            android:onClick=\"ChangeMethod\"/>\r\n\r\n    </LinearLayout>\r\n</androidx.constraintlayout.widget.ConstraintLayout>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/res/layout/activity_setting.xml	(revision 9c9cf6595b1186c6ce224e68bbae3fb164c08f2a)
++++ app/src/main/res/layout/activity_setting.xml	(date 1616357181747)
+@@ -23,7 +23,7 @@
+             android:layout_width="match_parent"
+             android:layout_height="wrap_content"
+             android:gravity="right"
+-            android:text="طريقة حساب أوقات الصلاة:"
++            android:text="@string/calcway"
+             android:layout_marginTop="35px"
+             android:textSize="15sp"></TextView>
+ 
+@@ -35,7 +35,7 @@
+             android:layout_width="match_parent"
+             android:layout_height="wrap_content"
+             android:gravity="right"
+-            android:text="طريقة حساب صلاة العصر:"
++            android:text="@string/asrtime"
+             android:layout_marginTop="35px"
+             android:textSize="15sp"></TextView>
+         <Spinner
+@@ -46,7 +46,7 @@
+             android:layout_width="match_parent"
+             android:layout_height="wrap_content"
+             android:gravity="right"
+-            android:text="طريقة عرض الوقت:"
++            android:text="@string/timedis"
+             android:layout_marginTop="35px"
+             android:textSize="15sp"></TextView>
+         <Spinner
+@@ -58,14 +58,14 @@
+             android:id="@+id/on_off_switch"
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content"
+-            android:text="الوضع الصامت"
++            android:text="@string/silentmode"
+             android:textOff="OFF"
+             android:textOn="ON"/>
+         <Button
+             android:id="@+id/btnSubmit"
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content"
+-            android:text="حفظ التعديلات"
++            android:text="@string/submit"
+             android:onClick="ChangeMethod"/>
+ 
+     </LinearLayout>

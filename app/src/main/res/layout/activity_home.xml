@@ -65,30 +65,30 @@
                 android:id="@+id/fajr"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="TextView" />
+                android:text="@string/tv" />
             <TextView
                 android:id="@+id/duhr"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="TextView" />
+                android:text="@string/tv1" />
 
             <TextView
                 android:id="@+id/asr"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="TextView" />
+                android:text="@string/tv2" />
 
             <TextView
                 android:id="@+id/maghrb"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="TextView" />
+                android:text="@string/tv3" />
 
             <TextView
                 android:id="@+id/isha"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="TextView" />
+                android:text="@string/tv4" />
 
 
         </LinearLayout>

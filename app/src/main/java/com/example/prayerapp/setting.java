@@ -8,6 +8,7 @@ import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.media.AudioManager;
 import android.os.Build;
@@ -29,7 +30,7 @@ import java.util.Random;
 
 public class setting extends AppCompatActivity {
     DrawerLayout drawerLayout;
-   Spinner spinner1, spinner2, spinner3,spinner4;
+   Spinner spinner1, spinner2, spinner3,spinner6;
    Button btnSubmit;
   int calcMethod, asrMethod,timeMethod, silentMethod;
   Calendar c = Calendar.getInstance();
@@ -39,7 +40,7 @@ public class setting extends AppCompatActivity {
         setContentView(R.layout.activity_setting);
         drawerLayout = findViewById(R.id.drawer_layout);
         btnSubmit=findViewById(R.id.btnSubmit);
-
+        silentMethod = 0;
 
         //Create Spinner 1 --------------------------------------------------------------------------------------
         spinner1 = (Spinner) findViewById(R.id.spinner1);
@@ -126,9 +127,8 @@ public class setting extends AppCompatActivity {
 
         //Create Spinner 4 --------------------------------------------------------------------------------------
 
-        spinner4 = (Spinner) findViewById(R.id.spinner4);
+        spinner6 = (Spinner) findViewById(R.id.spinner6);
         List<String> list4 = new ArrayList<String>();
-        list4.add("نظام الرنين");
         list4.add("غير صامت");
         list4.add("15 دقيقة");
         list4.add("30 دقيقة");
@@ -137,13 +137,19 @@ public class setting extends AppCompatActivity {
         ArrayAdapter<String> dataAdapter4 = new ArrayAdapter<String>(this,
                 android.R.layout.simple_spinner_item, list4);
         dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinner4.setAdapter(dataAdapter4);
+        spinner6.setAdapter(dataAdapter4);
 
 
-        spinner4.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+        spinner6.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-              silentMethod= (int) spinner4.getSelectedItemId();
+
+                if (silentMethod==0) {
+                    silentMethod= (int) spinner6.getSelectedItemId();
+                }else{
+                    loadPref();
+                }
+
                 Log.i("silent method",silentMethod+"");
                 Home.timeformat=silentMethod;
 
@@ -154,19 +160,22 @@ public class setting extends AppCompatActivity {
                        // silentOFF();
                        // Toast.makeText(getApplicationContext() , "تم إيقاف الوضع الصامت", Toast.LENGTH_LONG).show();
                        // break;
-                    case 2:// 15 minutes 900000
+                    case 1:// 15 minutes 900000
                         delay = (long) 60000;
                         setTime(delay);
+                        savePref(silentMethod);
                         Toast.makeText(getApplicationContext() , "تم تشغيل الوضع الصامت ل 15 دقيقة", Toast.LENGTH_LONG).show();
                         break;
-                    case 3://30 minutes
+                    case 2://30 minutes
                         delay = (long) 900000*2;
                         setTime(delay);
+                        savePref(silentMethod);
                         Toast.makeText(getApplicationContext() , "تم تشغيل الوضع الصامت ل 30 دقيقة", Toast.LENGTH_LONG).show();
                         break;
-                    case 4 : //45 minutes
+                    case 3: //45 minutes
                         delay = (long) 2700000;
                         setTime(delay);
+                        savePref(silentMethod);
                         Toast.makeText(getApplicationContext() , "تم تشغيل الوضع الصامت ل 45 دقيقة", Toast.LENGTH_LONG).show();
                         break;
 
@@ -181,46 +190,6 @@ public class setting extends AppCompatActivity {
             }
         });
 
-
-        //Switch declerations **************************************DELETE WHEN DONE
-        Switch mySwitch = (Switch)findViewById(R.id.on_off_switch);
-        mySwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-
-                Context context = getApplicationContext();
-                NotificationManager notificationManager =
-                        (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
-
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M
-                        && !notificationManager.isNotificationPolicyAccessGranted()) {
-
-                    Intent intent = new Intent(
-                            android.provider.Settings
-                                    .ACTION_NOTIFICATION_POLICY_ACCESS_SETTINGS);
-
-                    startActivity(intent);
-                }
-                AudioManager myAudioManager;
-                myAudioManager = (AudioManager)getSystemService(Context.AUDIO_SERVICE);
-
-                if (isChecked) {
-                    //For Silent
-                    myAudioManager.setRingerMode(AudioManager.RINGER_MODE_SILENT);
-
-                    Toast.makeText(getApplicationContext() , "text", Toast.LENGTH_LONG).show();
-
-                    //do something when unchecked
-                }
-                else
-                    myAudioManager.setRingerMode(AudioManager.RINGER_MODE_NORMAL);
-                Toast.makeText(getApplicationContext() , "else", Toast.LENGTH_LONG).show();
-
-            }
-
-        });
-
-
     }//End on create
 
     @Override
@@ -232,7 +201,23 @@ public class setting extends AppCompatActivity {
     public void onRestoreInstanceState(Bundle savedInstanceState){
         super.onRestoreInstanceState(savedInstanceState);
         silentMethod=savedInstanceState.getInt("choice");
-        spinner4.setSelection(silentMethod);
+        spinner6.setSelection(silentMethod);
+    }
+
+    public void loadPref(){
+        SharedPreferences sharedPref = getSharedPreferences("preference",MODE_PRIVATE);
+        silentMethod = sharedPref.getInt("userChoiceSpinner",0);
+        if(silentMethod != 0) {
+            // set the selected value of the spinner
+            spinner6.setSelection(silentMethod);
+        }
+    }
+
+    public void savePref(int sm){
+        SharedPreferences sharedPref = getSharedPreferences("preference",0);
+        SharedPreferences.Editor prefEditor = sharedPref.edit();
+        prefEditor.putInt("userChoiceSpinner",sm);
+        prefEditor.commit();
     }
 
     //Turn OFF Silent Mode -----------------------------------------------------------------------------------
@@ -290,6 +275,7 @@ public class setting extends AppCompatActivity {
                     public void run() {
                         Log.i("tag","bitch work");
                         silentOFF();
+                        savePref(0);
                     }
                 }, time);
 
