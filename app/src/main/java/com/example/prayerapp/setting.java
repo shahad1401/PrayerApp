@@ -147,11 +147,11 @@ public class setting extends AppCompatActivity {
         list5.add("أقل بدقيقتين ");
         list5.add("أقل بدقيقة");
         list5.add("لا يوجد تعديل");
-        list5.add("أكثر ب ٥ دقائق");
-        list5.add("أكثر ب ٤ دقائق");
-        list5.add("أكثر ب ٣ دقائق");
-        list5.add("أكثر بدقيقتين");
         list5.add("أكثر بدقيقة ");
+        list5.add("أكثر بدقيقتين");
+        list5.add("أكثر ب ٣ دقائق");
+        list5.add("أكثر ب ٤ دقائق");
+        list5.add("أكثر ب ٥ دقائق");
 
         ArrayAdapter<String> dataAdapter5 = new ArrayAdapter<String>(this,
                 android.R.layout.simple_spinner_item, list5);
@@ -347,7 +347,11 @@ public class setting extends AppCompatActivity {
         Home.closeDrawer(drawerLayout);
     }
 
-    public void ChangeMethod(View view) {
-        Home.redirectActivity(this, Home.class);
+    public void submit(View view) {
+        //set settings
+
+        //save preferences
+
+
     }
 }//End class

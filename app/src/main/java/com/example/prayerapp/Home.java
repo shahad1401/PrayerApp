@@ -125,11 +125,11 @@ String[] prayer;
 
         prayers.setTimeFormat(1); // 12 (1)
         prayers.setCalcMethod(4); //um alqora 4
-        Log.i("calc method",prayers.getCalcMethod()+"");
+        //Log.i("calc method",prayers.getCalcMethod()+"");
         prayers.setAsrJuristic(0); // Shafii (standard) (0)
-        Log.i("AsrJuristic method",prayers.getAsrJuristic()+"");
+       // Log.i("AsrJuristic method",prayers.getAsrJuristic()+"");
         prayers.setAdjustHighLats(0); //none
-        Log.i("AdjustHighLats method",prayers.getAdjustHighLats()+"");
+        //Log.i("AdjustHighLats method",prayers.getAdjustHighLats()+"");
         int[] offsets = {0, 0, 0, 0, 0, 0, 0}; // {Fajr,Sunrise,Dhuhr,Asr,Sunset,Maghrib,Isha}
         prayers.tune(offsets);
 
@@ -137,8 +137,8 @@ String[] prayer;
         Calendar cal = Calendar.getInstance();
         cal.setTime(now);
        double timezone=prayers.getBaseTimeZone();
-        Log.i("timezone",timezone+"");
-        Log.i("lat,lang",lat+", "+lang+"");
+        //Log.i("timezone",timezone+"");
+       // Log.i("lat,lang",lat+", "+lang+"");
         ArrayList<String> prayerTimes = prayers.getPrayerTimes(cal, lat, lang, timezone);
         ArrayList<String> prayerNames = prayers.getTimeNames();
 
@@ -205,25 +205,25 @@ String[] prayer;
 
                         //Set Latitude on TextView
                         lat= addresses.get(0).getLatitude();
-                        Log.i("Latitude",lat+"");
+                        //Log.i("Latitude",lat+"");
 
                          //Set Longitude on TextView
                         lang= addresses.get(0).getLongitude();
-                        Log.i("Longitude",lang+"");
+                        //Log.i("Longitude",lang+"");
 
                         // Set CountryName on TextView
                         country= addresses.get(0).getCountryName();
-                        Log.i("CountryName",country);
+                        //Log.i("CountryName",country);
                         textView1.setText("Country: "+ country);
 
                         //Set Locality on TextView
                         locality= addresses.get(0).getLocality();
-                        Log.i("Locality",locality);
+                        //Log.i("Locality",locality);
                         textView2.setText("Locality: "+ locality);
 
                         //Set AddressLine on TextView
                         address=addresses.get(0).getAddressLine(0);
-                        Log.i("AddressLine",address);
+                        //Log.i("AddressLine",address);
                         textView3.setText("Address: "+ address);
                         prayersTime(calcMethod,asrMethod,timeformat);
                     } catch (IOException e) {
