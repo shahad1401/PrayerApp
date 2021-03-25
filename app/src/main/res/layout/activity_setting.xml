@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:id="@+id/drawer_layout"
+    android:background="@drawable/gradient"
     tools:context=".setting">
 
 
@@ -25,7 +26,10 @@
             android:gravity="right"
             android:text="@string/calcway"
             android:layout_marginTop="35px"
-            android:textSize="15sp"></TextView>
+            android:textSize="15sp"
+            android:textColor="#ffffff"
+            android:textStyle="bold"
+            ></TextView>
 
         <Spinner
             android:id="@+id/spinner1"
@@ -37,7 +41,9 @@
             android:gravity="right"
             android:text="@string/asrtime"
             android:layout_marginTop="35px"
-            android:textSize="15sp"></TextView>
+            android:textSize="15sp"
+            android:textColor="#ffffff"
+            android:textStyle="bold"></TextView>
         <Spinner
             android:id="@+id/spinner2"
             android:layout_width="match_parent"
@@ -48,7 +54,9 @@
             android:gravity="right"
             android:text="@string/timedis"
             android:layout_marginTop="35px"
-            android:textSize="15sp"></TextView>
+            android:textSize="15sp"
+            android:textColor="#ffffff"
+            android:textStyle="bold"></TextView>
         <Spinner
             android:id="@+id/spinner3"
             android:layout_width="match_parent"
@@ -59,7 +67,9 @@
             android:gravity="right"
             android:text="ضبط دقائق الصلاة:"
             android:layout_marginTop="35px"
-            android:textSize="15sp"/>
+            android:textSize="15sp"
+            android:textColor="#ffffff"
+            android:textStyle="bold"/>
 
         <Spinner
             android:id="@+id/spinner4"
@@ -76,11 +86,14 @@
             android:gravity="right"
             android:text="طريقة ضبط خط العرض المرتفع :"
             android:layout_marginTop="35px"
-            android:textSize="15sp"/>
+            android:textSize="15sp"
+            android:textColor="#ffffff"
+            android:textStyle="bold"/>
         <Spinner
             android:id="@+id/spinner5"
             android:layout_width="match_parent"
-            android:layout_height="66dp" />
+            android:layout_height="66dp"
+            />
 
         <TextView
             android:layout_width="match_parent"
@@ -88,12 +101,15 @@
             android:gravity="right"
             android:text="الوضع الصامت:"
             android:layout_marginTop="35px"
-            android:textSize="15sp"/>
+            android:textSize="15sp"
+            android:textColor="#ffffff"
+            android:textStyle="bold"/>
 
         <Spinner
             android:id="@+id/spinner6"
             android:layout_width="match_parent"
-            android:layout_height="66dp" />
+            android:layout_height="66dp"
+            />
 
         <Button
             android:id="@+id/btnSubmit"
@@ -102,7 +118,9 @@
             android:text="@string/submit"
             android:onClick="submit"
             android:gravity="center_horizontal"
-            android:layout_marginLeft="150dp"/>
+            android:layout_marginLeft="150dp"
+            android:backgroundTint="#CC420420"
+            android:textColor="@color/white"/>
 
     </LinearLayout>
 

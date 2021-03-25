@@ -6,6 +6,7 @@
     android:layout_height="match_parent"
     tools:context=".Login"
     android:orientation="vertical"
+    android:background="@drawable/gradient"
     android:gravity="center_horizontal">
 
     <EditText
@@ -15,6 +16,9 @@
         android:autofillHints="text here"
         android:hint="@string/email_ar"
         android:inputType="textUri"
+        android:textColor="@color/white"
+        android:textColorHint="@color/white"
+        android:backgroundTint="@color/white"
         android:layout_marginTop="200dp">
         ></EditText>
 
@@ -25,6 +29,9 @@
         android:autofillHints="text here"
         android:hint="@string/password_ar"
         android:inputType="textUri"
+        android:textColor="@color/white"
+        android:textColorHint="@color/white"
+        android:backgroundTint="@color/white"
         ></EditText>
 
     <Button
@@ -32,7 +39,9 @@
         android:layout_width="150dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="50dp"
-        android:text="@string/login_ar" />
+        android:text="@string/login_ar"
+        android:backgroundTint="#CC420420"
+        android:textColor="@color/white"/>
 
     <LinearLayout
         android:layout_width="wrap_content"
@@ -46,12 +55,16 @@
             android:layout_height="35dp"
             android:paddingLeft="10dp"
             android:textStyle="bold"
-            android:textColor="#3944BC"
+            android:textColor="#ffffff"
             android:text="@string/join_ar"/>
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="35dp"
-            android:text="@string/account_ar"/>
+            android:text="@string/account_ar"
+            android:textStyle="bold"
+            android:layout_marginLeft="2pt"
+            android:textColor="#420420"/>
 
 
 

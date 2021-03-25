@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:id="@+id/drawer_layout"
+    android:background="@drawable/gradient"
     tools:context=".Athkar">
 
     <LinearLayout
@@ -17,9 +18,10 @@
 
         <TextView
             android:layout_width="match_parent"
-            android:layout_height="283dp"
+            android:layout_height="274dp"
             android:gravity="center"
             android:text="@string/athkar"
+            android:textColor="@color/white"
             android:textSize="50sp"></TextView>
         <Button
             android:id="@+id/bt_morning"
@@ -27,7 +29,9 @@
             android:layout_height="wrap_content"
             android:text="@string/moriningathkar"
             android:onClick="clickMorining"
-            android:textSize="25sp"/>
+            android:textSize="25sp"
+            android:backgroundTint="#CC420420"
+            android:textColor="@color/white"/>
 
         <Button
             android:id="@+id/bt_night"
@@ -35,7 +39,9 @@
             android:layout_height="wrap_content"
             android:text="@string/nightathkar"
             android:onClick="clickNight"
-            android:textSize="25sp"/>
+            android:textSize="25sp"
+            android:backgroundTint="#CC420420"
+            android:textColor="@color/white"/>
     </LinearLayout>
 
     <RelativeLayout

@@ -4,14 +4,15 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:background="#ffffff">
 
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="120dp"
         android:layout_margin="5dp"
         android:onClick="clickLogo"
-        app:srcCompat="@drawable/ic_andriod">
+        app:srcCompat="@mipmap/ic_launcher_round">
     </ImageView>
 
 
@@ -37,7 +38,9 @@
             android:textSize="20dp"
             android:padding="12dp"
             android:layout_marginStart="16dp"
-            android:layout_marginLeft="16dp"></TextView>
+            android:layout_marginLeft="16dp"
+            android:textColor="#420420"
+            ></TextView>
 
         <ImageView
             android:layout_width="wrap_content"
@@ -62,14 +65,16 @@
             android:textSize="20dp"
             android:padding="12dp"
             android:layout_marginStart="16dp"
-            android:layout_marginLeft="16dp"></TextView>
+            android:layout_marginLeft="16dp"
+            android:textColor="#420420"></TextView>
 
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="48dp"
             android:layout_marginRight="48dp"
-            app:srcCompat="@drawable/ic_sabhah"></ImageView>
+            app:srcCompat="@drawable/ic_sabhah"
+            ></ImageView>
     </LinearLayout>
 
     <LinearLayout
@@ -87,7 +92,8 @@
             android:textSize="20dp"
             android:padding="12dp"
             android:layout_marginStart="16dp"
-            android:layout_marginLeft="16dp"></TextView>
+            android:layout_marginLeft="16dp"
+            android:textColor="#420420"></TextView>
 
         <ImageView
             android:layout_width="wrap_content"
@@ -112,7 +118,8 @@
             android:textSize="20dp"
             android:padding="12dp"
             android:layout_marginStart="16dp"
-            android:layout_marginLeft="16dp"></TextView>
+            android:layout_marginLeft="16dp"
+            android:textColor="#420420"></TextView>
 
         <ImageView
             android:layout_width="wrap_content"
@@ -138,14 +145,16 @@
             android:textSize="20dp"
             android:padding="12dp"
             android:layout_marginStart="16dp"
-            android:layout_marginLeft="16dp"></TextView>
+            android:layout_marginLeft="16dp"
+            android:textColor="#420420"></TextView>
 
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="48dp"
             android:layout_marginRight="48dp"
-            app:srcCompat="@drawable/ic_logout"></ImageView>
+            app:srcCompat="@drawable/ic_logout"
+            ></ImageView>
 
     </LinearLayout>
 </LinearLayout>
