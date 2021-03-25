@@ -48,7 +48,7 @@ import static java.lang.Integer.parseInt;
 
 public class Home extends AppCompatActivity {
 
-    public static int timeformat , calcMethod, asrMethod;
+    public static int timeformat=1 , calcMethod=4, asrMethod=0 , highlats=0 , offset=0;
     //initialize variable
     Button btLocation;
     static double lat;
@@ -120,25 +120,24 @@ String[] prayer;
         drawerLayout = findViewById(R.id.drawer_layout);
     } // end on create
 
-    public void prayersTime(int timeformat, int calcmethod, int asrMethod) {
+    public void prayersTime(int calcmethod, int asrMethod, int timeformat , int highlats , int offset) {
         PrayTime prayers = new PrayTime();
 
-        prayers.setTimeFormat(1); // 12 (1)
-        prayers.setCalcMethod(4); //um alqora 4
+        prayers.setTimeFormat(timeformat); // 12 (1)
+        prayers.setCalcMethod(calcmethod); //um alqora 4
         //Log.i("calc method",prayers.getCalcMethod()+"");
-        prayers.setAsrJuristic(0); // Shafii (standard) (0)
+        prayers.setAsrJuristic(asrMethod); // Shafii (standard) (0)
        // Log.i("AsrJuristic method",prayers.getAsrJuristic()+"");
-        prayers.setAdjustHighLats(0); //none
+        prayers.setAdjustHighLats(highlats); //none
         //Log.i("AdjustHighLats method",prayers.getAdjustHighLats()+"");
-        int[] offsets = {0, 0, 0, 0, 0, 0, 0}; // {Fajr,Sunrise,Dhuhr,Asr,Sunset,Maghrib,Isha}
+        int[] offsets = {offset, offset, offset, offset, offset, offset, offset}; // {Fajr,Sunrise,Dhuhr,Asr,Sunset,Maghrib,Isha}
         prayers.tune(offsets);
 
         Date now = new Date();
         Calendar cal = Calendar.getInstance();
         cal.setTime(now);
        double timezone=prayers.getBaseTimeZone();
-        //Log.i("timezone",timezone+"");
-       // Log.i("lat,lang",lat+", "+lang+"");
+
         ArrayList<String> prayerTimes = prayers.getPrayerTimes(cal, lat, lang, timezone);
         ArrayList<String> prayerNames = prayers.getTimeNames();
 
@@ -225,7 +224,7 @@ String[] prayer;
                         address=addresses.get(0).getAddressLine(0);
                         //Log.i("AddressLine",address);
                         textView3.setText("Address: "+ address);
-                        prayersTime(calcMethod,asrMethod,timeformat);
+                        prayersTime(calcMethod,asrMethod,timeformat,highlats,offset);
                     } catch (IOException e) {
                         e.printStackTrace();
                     }

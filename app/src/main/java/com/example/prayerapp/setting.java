@@ -352,12 +352,25 @@ public class setting extends AppCompatActivity {
     public void submit(View view) {
         Toast.makeText(this,"saved", Toast.LENGTH_LONG).show();
         //set settings
-         setSettings();
-         startActivity(new Intent(this , Home.class));
+        adjustPray();
         //save preferences
-
+        setSettings();
+        startActivity(new Intent(this , Home.class));
 
     }
+
+    public void adjustPray(){
+        int spinnerValue1= spinner1.getSelectedItemPosition();
+        int spinnerValue2= spinner2.getSelectedItemPosition();
+        int spinnerValue3= spinner3.getSelectedItemPosition();
+        int spinnerValue4= spinner4.getSelectedItemPosition();
+        int spinnerValue5= spinner5.getSelectedItemPosition();
+
+        Home h = new Home();
+        h.prayersTime(spinnerValue1,spinnerValue2,spinnerValue3,spinnerValue4,spinnerValue5);
+    }
+
+
     public void setSettings(){
         Toast.makeText(this,"seeeeet", Toast.LENGTH_LONG).show();
         int spinnerValue1= spinner1.getSelectedItemPosition();
