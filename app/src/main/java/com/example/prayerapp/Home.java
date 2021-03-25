@@ -3,24 +3,32 @@ package com.example.prayerapp;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
+import androidx.core.app.NotificationCompat;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
 import android.Manifest;
 import android.app.Activity;
+import android.app.AlarmManager;
 import android.app.AlertDialog;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Address;
 import android.location.Geocoder;
 import android.location.Location;
+import android.os.Build;
 import android.os.Bundle;
 import android.text.Html;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
@@ -33,6 +41,10 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
+import java.util.Random;
+
+import static java.lang.Integer.parseInt;
+
 
 public class Home extends AppCompatActivity {
 
@@ -53,6 +65,14 @@ public class Home extends AppCompatActivity {
     FusedLocationProviderClient fusedLocationProviderClient;
     DrawerLayout drawerLayout;
 String[] prayer;
+    public static final String CHANNEL_1_ID = "channel1";
+    NotificationManager manager;
+    static ArrayList<String> prayerTimesNotify = new ArrayList<String>();
+    static ArrayList<String> prayerNamesNotify = new ArrayList<String>();
+     Random random = new Random();
+    private Calendar c = Calendar.getInstance();
+//     int m = random.nextInt(9999 - 1000) + 1000;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -95,11 +115,12 @@ String[] prayer;
             }
         });
 
-prayersTime(calcMethod,asrMethod,timeformat);
-        drawerLayout = findViewById(R.id.drawer_layout);
-    }
+//prayersTime(calcMethod,asrMethod,timeformat);
 
-    public static void prayersTime(int timeformat, int calcmethod, int asrMethod) {
+        drawerLayout = findViewById(R.id.drawer_layout);
+    } // end on create
+
+    public void prayersTime(int timeformat, int calcmethod, int asrMethod) {
         PrayTime prayers = new PrayTime();
 
         prayers.setTimeFormat(1); // 12 (1)
@@ -123,8 +144,27 @@ prayersTime(calcMethod,asrMethod,timeformat);
 
         for (int i = 0; i < prayerTimes.size(); i++) {
             System.out.println(prayerNames.get(i) + " - " + prayerTimes.get(i));
-           // prayer[i]= prayerTimes.get(i);
+            // prayer[i]= prayerTimes.get(i);
         }
+
+// time for notification fajr
+//        prayerTimesNotify.add(prayerTimes.get(0));
+//        prayerNamesNotify.add(prayerNames.get(0));
+//        // duhr
+//        prayerTimesNotify.add(prayerTimes.get(2));
+//        prayerNamesNotify.add(prayerNames.get(2));
+//        //asr
+//        prayerTimesNotify.add(prayerTimes.get(3));
+//        prayerNamesNotify.add(prayerNames.get(3));
+//        //magrb
+//        prayerTimesNotify.add(prayerTimes.get(5));
+//        prayerNamesNotify.add(prayerNames.get(5));
+//        //isha
+//        prayerTimesNotify.add(prayerTimes.get(6));
+//        prayerNamesNotify.add(prayerNames.get(6));
+
+        createNotification(prayerNames,prayerTimes);
+
         //setting the values on the screen
         fajr.setText(prayerNames.get(0)+": "+ prayerTimes.get(0));
         duhr.setText(prayerNames.get(2)+": "+ prayerTimes.get(2));
@@ -148,6 +188,10 @@ prayersTime(calcMethod,asrMethod,timeformat);
         fusedLocationProviderClient.getLastLocation().addOnCompleteListener(new OnCompleteListener<Location>() {
             @Override
             public void onComplete(@NonNull Task<Location> task) {
+
+                System.out.println("im in ouuut");
+
+                Toast.makeText(getApplicationContext(),"im in complete" , Toast.LENGTH_LONG);
                 //initialize location
                 Location location = task.getResult();
                 if (location != null) {
@@ -262,4 +306,45 @@ prayersTime(calcMethod,asrMethod,timeformat);
         super.onPause();
         closeDrawer(drawerLayout);
     }
+
+    public void createNotification(ArrayList<String> names , ArrayList<String> times){
+
+        //fajr notification
+        Log.i("notify" , "Notify");
+        Log.i("size" , ""+times.size());
+        for (int i=0 ; i< 7 ; i++){
+
+            if(i!=1 && i!=4){
+
+                Log.i(times.get(i) , names.get(i));
+
+                String hour = times.get(i).substring(0,2);
+                String min = times.get(i).substring(3,5);
+
+                int ihour = parseInt(hour);
+                int imin = parseInt(min);
+                Log.i(hour , "hour");
+
+                c.setTimeInMillis(System.currentTimeMillis());
+                c.set(Calendar.HOUR_OF_DAY, ihour);
+                c.set(Calendar.MINUTE, imin); // prayerTimeNotify
+                // to update time use java.awt.event
+
+                long delay = c.getTimeInMillis();
+
+                Intent intent = new Intent(this, Notification.class);
+                intent.putExtra("name", names.get(i));
+
+                PendingIntent pendingIntent = PendingIntent.getBroadcast(this, random.nextInt(9999 - 1000) + 1000,  intent, PendingIntent.FLAG_UPDATE_CURRENT);
+
+                AlarmManager alarmManager = (AlarmManager) getSystemService(Context. ALARM_SERVICE ) ;
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+                    alarmManager.setExact(AlarmManager.RTC_WAKEUP  , delay , pendingIntent) ;
+                }
+            }
+        }
+
+    }
+
+
 }
