@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:id="@+id/drawer_layout"
+    android:background="@drawable/gradient"
     tools:context=".Home">
 
     <LinearLayout
@@ -17,78 +18,147 @@
             layout="@layout/main_toolbar"
             />
 
+<!--        <LinearLayout-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_margin="4pt"-->
+<!--            android:gravity="center_horizontal"-->
+<!--            android:orientation="vertical"-->
+<!--            android:padding="16dp">-->
+
+<!--            <TextView-->
+<!--                android:id="@+id/textView0"-->
+<!--                android:layout_width="352dp"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:text="اضغط الزر لحساب مواقيت الصلاة حسب التوقيت المحلي لموقعك"-->
+<!--                android:textColor="#ffffff"-->
+<!--                android:textSize="8pt" />-->
+
+<!--        </LinearLayout>-->
+
+
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="162dp"
-            android:background="#ECECEC"
+            android:layout_height="240dp"
+            android:layout_margin="4pt"
+            android:background="#99FFffff"
             android:gravity="center_horizontal"
             android:orientation="vertical"
             android:padding="16dp">
 
             <TextView
+                android:id="@+id/textView0"
+                android:layout_width="352dp"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="2pt"
+                android:text="اضغط الزر لحساب مواقيت الصلاة حسب التوقيت المحلي لموقعك"
+                android:textColor="#420420"
+                android:textSize="8pt"
+                android:textStyle="bold" />
+
+            <TextView
                 android:id="@+id/textView1"
                 android:layout_width="150dp"
                 android:layout_height="wrap_content"
-                 />
+                android:layout_margin="2pt"
+                android:textColor="#420420" />
 
             <TextView
                 android:id="@+id/textView2"
                 android:layout_width="150dp"
                 android:layout_height="wrap_content"
-                />
+                android:layout_margin="2pt"
+                android:textColor="#420420" />
 
             <TextView
                 android:id="@+id/textView3"
                 android:layout_width="301dp"
                 android:layout_height="wrap_content"
-                 />
+                android:layout_margin="2pt"
+                android:textColor="#420420" />
 
             <Button
                 android:id="@+id/bt_location"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Get Location" />
+                android:layout_marginTop="2pt"
+                android:backgroundTint="#CC420420"
+                android:text="Get Location"
+                android:textColor="@color/white" />
         </LinearLayout>
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
             android:text="@string/pTimes"
+            android:textColor="@color/white"
             android:textSize="50sp"></TextView>
+
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="115dp"
+            android:layout_height="278dp"
             android:gravity="center_horizontal"
-            android:orientation="vertical"
-            >
+            android:orientation="vertical">
+
             <TextView
                 android:id="@+id/fajr"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/tv" />
+                android:layout_margin="4pt"
+                android:background="#99FFffff"
+                android:padding="2pt"
+                android:text="@string/tv"
+                android:textAlignment="center"
+                android:textColor="#420420"
+                android:textSize="18sp" />
+
             <TextView
                 android:id="@+id/duhr"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/tv1" />
+                android:layout_margin="4pt"
+                android:background="#99FFffff"
+                android:padding="2pt"
+                android:text="@string/tv1"
+                android:textAlignment="center"
+                android:textColor="#420420"
+                android:textSize="18sp" />
 
             <TextView
                 android:id="@+id/asr"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/tv2" />
+                android:layout_margin="4pt"
+                android:background="#99FFffff"
+                android:padding="2pt"
+                android:text="@string/tv2"
+                android:textAlignment="center"
+                android:textColor="#420420"
+                android:textSize="18sp" />
 
             <TextView
                 android:id="@+id/maghrb"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/tv3" />
+                android:layout_margin="4pt"
+                android:background="#99FFffff"
+                android:padding="2pt"
+                android:text="@string/tv3"
+                android:textAlignment="center"
+                android:textColor="#420420"
+                android:textSize="18sp" />
 
             <TextView
                 android:id="@+id/isha"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/tv4" />
+                android:layout_margin="4pt"
+                android:background="#99FFffff"
+                android:padding="2pt"
+                android:text="@string/tv4"
+                android:textAlignment="center"
+                android:textColor="#420420"
+                android:textSize="18sp" />
 
 
         </LinearLayout>
