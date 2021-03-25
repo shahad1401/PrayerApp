@@ -28,6 +28,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
@@ -41,6 +42,8 @@ import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 import java.util.Random;
+
+import static java.lang.Integer.parseInt;
 
 
 public class Home extends AppCompatActivity {
@@ -113,14 +116,13 @@ String[] prayer;
         });
 
 prayersTime(calcMethod,asrMethod,timeformat);
+
         drawerLayout = findViewById(R.id.drawer_layout);
 
-        createNotification();
-
-
+        createNotification(prayerNamesNotify,prayerTimesNotify);
     } // end on create
 
-    public static void prayersTime(int timeformat, int calcmethod, int asrMethod) {
+    public void prayersTime(int timeformat, int calcmethod, int asrMethod) {
         PrayTime prayers = new PrayTime();
 
         prayers.setTimeFormat(1); // 12 (1)
@@ -163,6 +165,7 @@ prayersTime(calcMethod,asrMethod,timeformat);
         prayerTimesNotify.add(prayerTimes.get(6));
         prayerNamesNotify.add(prayerNames.get(6));
 
+        createNotification(prayerNames,prayerTimes);
 
         //setting the values on the screen
         fajr.setText(prayerNames.get(0)+": "+ prayerTimes.get(0));
@@ -302,26 +305,44 @@ prayersTime(calcMethod,asrMethod,timeformat);
         closeDrawer(drawerLayout);
     }
 
-    public void createNotification(){
+    public void createNotification(ArrayList<String> names , ArrayList<String> times){
 
+        //fajr notification
+        Log.i("notify" , "Notify");
+        for (int i=0 ; i< times.size() ; i++){
 
-        c.setTimeInMillis(System.currentTimeMillis());
-        c.set(Calendar.HOUR_OF_DAY, 1);
-        c.set(Calendar.MINUTE, 18); // prayerTimeNotify
-        // to update time use java.awt.event
+            if(i!=1 && i!=4){
 
-        long delay = c.getTimeInMillis();
+                Log.i(times.get(i) , names.get(i));
 
-        Intent intent = new Intent(this, Notification.class);
-        intent.putExtra("name", prayerNamesNotify.get(0));
-        //intent.putExtra("time",time);
+                String hour = times.get(i).substring(0,2);
+                String min = times.get(i).substring(3,5);
 
-        PendingIntent pendingIntent = PendingIntent.getBroadcast(this, random.nextInt(9999 - 1000) + 1000,  intent, PendingIntent.FLAG_UPDATE_CURRENT);
+                int ihour = parseInt(hour);
+                int imin = parseInt(min);
+                Log.i(hour , "hour");
 
-        AlarmManager alarmManager = (AlarmManager) getSystemService(Context. ALARM_SERVICE ) ;
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-            alarmManager.setExact(AlarmManager.RTC_WAKEUP  , delay , pendingIntent) ;
+                c.setTimeInMillis(System.currentTimeMillis());
+                c.set(Calendar.HOUR_OF_DAY, ihour);
+                c.set(Calendar.MINUTE, imin); // prayerTimeNotify
+                // to update time use java.awt.event
+
+                long delay = c.getTimeInMillis();
+
+                Intent intent = new Intent(this, Notification.class);
+                intent.putExtra("name", names.get(i));
+
+                PendingIntent pendingIntent = PendingIntent.getBroadcast(this, random.nextInt(9999 - 1000) + 1000,  intent, PendingIntent.FLAG_UPDATE_CURRENT);
+
+                AlarmManager alarmManager = (AlarmManager) getSystemService(Context. ALARM_SERVICE ) ;
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+                    alarmManager.setExact(AlarmManager.RTC_WAKEUP  , delay , pendingIntent) ;
+                }
+            }
         }
+
+
+
 
     }
 
