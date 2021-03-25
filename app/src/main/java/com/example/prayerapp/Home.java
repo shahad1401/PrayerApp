@@ -115,11 +115,9 @@ String[] prayer;
             }
         });
 
-prayersTime(calcMethod,asrMethod,timeformat);
+//prayersTime(calcMethod,asrMethod,timeformat);
 
         drawerLayout = findViewById(R.id.drawer_layout);
-
-        createNotification(prayerNamesNotify,prayerTimesNotify);
     } // end on create
 
     public void prayersTime(int timeformat, int calcmethod, int asrMethod) {
@@ -150,20 +148,20 @@ prayersTime(calcMethod,asrMethod,timeformat);
         }
 
 // time for notification fajr
-        prayerTimesNotify.add(prayerTimes.get(0));
-        prayerNamesNotify.add(prayerNames.get(0));
-        // duhr
-        prayerTimesNotify.add(prayerTimes.get(2));
-        prayerNamesNotify.add(prayerNames.get(2));
-        //asr
-        prayerTimesNotify.add(prayerTimes.get(3));
-        prayerNamesNotify.add(prayerNames.get(3));
-        //magrb
-        prayerTimesNotify.add(prayerTimes.get(5));
-        prayerNamesNotify.add(prayerNames.get(5));
-        //isha
-        prayerTimesNotify.add(prayerTimes.get(6));
-        prayerNamesNotify.add(prayerNames.get(6));
+//        prayerTimesNotify.add(prayerTimes.get(0));
+//        prayerNamesNotify.add(prayerNames.get(0));
+//        // duhr
+//        prayerTimesNotify.add(prayerTimes.get(2));
+//        prayerNamesNotify.add(prayerNames.get(2));
+//        //asr
+//        prayerTimesNotify.add(prayerTimes.get(3));
+//        prayerNamesNotify.add(prayerNames.get(3));
+//        //magrb
+//        prayerTimesNotify.add(prayerTimes.get(5));
+//        prayerNamesNotify.add(prayerNames.get(5));
+//        //isha
+//        prayerTimesNotify.add(prayerTimes.get(6));
+//        prayerNamesNotify.add(prayerNames.get(6));
 
         createNotification(prayerNames,prayerTimes);
 
@@ -190,6 +188,10 @@ prayersTime(calcMethod,asrMethod,timeformat);
         fusedLocationProviderClient.getLastLocation().addOnCompleteListener(new OnCompleteListener<Location>() {
             @Override
             public void onComplete(@NonNull Task<Location> task) {
+
+                System.out.println("im in ouuut");
+
+                Toast.makeText(getApplicationContext(),"im in complete" , Toast.LENGTH_LONG);
                 //initialize location
                 Location location = task.getResult();
                 if (location != null) {
@@ -309,7 +311,8 @@ prayersTime(calcMethod,asrMethod,timeformat);
 
         //fajr notification
         Log.i("notify" , "Notify");
-        for (int i=0 ; i< times.size() ; i++){
+        Log.i("size" , ""+times.size());
+        for (int i=0 ; i< 7 ; i++){
 
             if(i!=1 && i!=4){
 
@@ -340,9 +343,6 @@ prayersTime(calcMethod,asrMethod,timeformat);
                 }
             }
         }
-
-
-
 
     }
 
