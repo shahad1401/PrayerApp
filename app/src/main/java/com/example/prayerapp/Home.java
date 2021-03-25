@@ -115,11 +115,9 @@ String[] prayer;
             }
         });
 
-prayersTime(calcMethod,asrMethod,timeformat);
+//prayersTime(calcMethod,asrMethod,timeformat);
 
         drawerLayout = findViewById(R.id.drawer_layout);
-
-        createNotification(prayerNamesNotify,prayerTimesNotify);
     } // end on create
 
     public void prayersTime(int timeformat, int calcmethod, int asrMethod) {
@@ -127,11 +125,11 @@ prayersTime(calcMethod,asrMethod,timeformat);
 
         prayers.setTimeFormat(1); // 12 (1)
         prayers.setCalcMethod(4); //um alqora 4
-        Log.i("calc method",prayers.getCalcMethod()+"");
+        //Log.i("calc method",prayers.getCalcMethod()+"");
         prayers.setAsrJuristic(0); // Shafii (standard) (0)
-        Log.i("AsrJuristic method",prayers.getAsrJuristic()+"");
+       // Log.i("AsrJuristic method",prayers.getAsrJuristic()+"");
         prayers.setAdjustHighLats(0); //none
-        Log.i("AdjustHighLats method",prayers.getAdjustHighLats()+"");
+        //Log.i("AdjustHighLats method",prayers.getAdjustHighLats()+"");
         int[] offsets = {0, 0, 0, 0, 0, 0, 0}; // {Fajr,Sunrise,Dhuhr,Asr,Sunset,Maghrib,Isha}
         prayers.tune(offsets);
 
@@ -139,8 +137,8 @@ prayersTime(calcMethod,asrMethod,timeformat);
         Calendar cal = Calendar.getInstance();
         cal.setTime(now);
        double timezone=prayers.getBaseTimeZone();
-        Log.i("timezone",timezone+"");
-        Log.i("lat,lang",lat+", "+lang+"");
+        //Log.i("timezone",timezone+"");
+       // Log.i("lat,lang",lat+", "+lang+"");
         ArrayList<String> prayerTimes = prayers.getPrayerTimes(cal, lat, lang, timezone);
         ArrayList<String> prayerNames = prayers.getTimeNames();
 
@@ -150,20 +148,20 @@ prayersTime(calcMethod,asrMethod,timeformat);
         }
 
 // time for notification fajr
-        prayerTimesNotify.add(prayerTimes.get(0));
-        prayerNamesNotify.add(prayerNames.get(0));
-        // duhr
-        prayerTimesNotify.add(prayerTimes.get(2));
-        prayerNamesNotify.add(prayerNames.get(2));
-        //asr
-        prayerTimesNotify.add(prayerTimes.get(3));
-        prayerNamesNotify.add(prayerNames.get(3));
-        //magrb
-        prayerTimesNotify.add(prayerTimes.get(5));
-        prayerNamesNotify.add(prayerNames.get(5));
-        //isha
-        prayerTimesNotify.add(prayerTimes.get(6));
-        prayerNamesNotify.add(prayerNames.get(6));
+//        prayerTimesNotify.add(prayerTimes.get(0));
+//        prayerNamesNotify.add(prayerNames.get(0));
+//        // duhr
+//        prayerTimesNotify.add(prayerTimes.get(2));
+//        prayerNamesNotify.add(prayerNames.get(2));
+//        //asr
+//        prayerTimesNotify.add(prayerTimes.get(3));
+//        prayerNamesNotify.add(prayerNames.get(3));
+//        //magrb
+//        prayerTimesNotify.add(prayerTimes.get(5));
+//        prayerNamesNotify.add(prayerNames.get(5));
+//        //isha
+//        prayerTimesNotify.add(prayerTimes.get(6));
+//        prayerNamesNotify.add(prayerNames.get(6));
 
         createNotification(prayerNames,prayerTimes);
 
@@ -190,6 +188,10 @@ prayersTime(calcMethod,asrMethod,timeformat);
         fusedLocationProviderClient.getLastLocation().addOnCompleteListener(new OnCompleteListener<Location>() {
             @Override
             public void onComplete(@NonNull Task<Location> task) {
+
+                System.out.println("im in ouuut");
+
+                Toast.makeText(getApplicationContext(),"im in complete" , Toast.LENGTH_LONG);
                 //initialize location
                 Location location = task.getResult();
                 if (location != null) {
@@ -203,25 +205,25 @@ prayersTime(calcMethod,asrMethod,timeformat);
 
                         //Set Latitude on TextView
                         lat= addresses.get(0).getLatitude();
-                        Log.i("Latitude",lat+"");
+                        //Log.i("Latitude",lat+"");
 
                          //Set Longitude on TextView
                         lang= addresses.get(0).getLongitude();
-                        Log.i("Longitude",lang+"");
+                        //Log.i("Longitude",lang+"");
 
                         // Set CountryName on TextView
                         country= addresses.get(0).getCountryName();
-                        Log.i("CountryName",country);
+                        //Log.i("CountryName",country);
                         textView1.setText("Country: "+ country);
 
                         //Set Locality on TextView
                         locality= addresses.get(0).getLocality();
-                        Log.i("Locality",locality);
+                        //Log.i("Locality",locality);
                         textView2.setText("Locality: "+ locality);
 
                         //Set AddressLine on TextView
                         address=addresses.get(0).getAddressLine(0);
-                        Log.i("AddressLine",address);
+                        //Log.i("AddressLine",address);
                         textView3.setText("Address: "+ address);
                         prayersTime(calcMethod,asrMethod,timeformat);
                     } catch (IOException e) {
@@ -309,7 +311,8 @@ prayersTime(calcMethod,asrMethod,timeformat);
 
         //fajr notification
         Log.i("notify" , "Notify");
-        for (int i=0 ; i< times.size() ; i++){
+        Log.i("size" , ""+times.size());
+        for (int i=0 ; i< 7 ; i++){
 
             if(i!=1 && i!=4){
 
@@ -340,9 +343,6 @@ prayersTime(calcMethod,asrMethod,timeformat);
                 }
             }
         }
-
-
-
 
     }
 
