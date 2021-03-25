@@ -38,6 +38,8 @@ public class setting extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_setting);
+
+
         drawerLayout = findViewById(R.id.drawer_layout);
         btnSubmit=findViewById(R.id.btnSubmit);
         silentMethod = 0;
@@ -116,7 +118,6 @@ public class setting extends AppCompatActivity {
          timeMethod= (int) spinner1.getSelectedItemId();
          Log.i("time method",timeMethod+"");
          Home.timeformat=timeMethod;
-
      }
 
      @Override
@@ -222,8 +223,9 @@ public class setting extends AppCompatActivity {
                 Home.timeformat=1;
             }
         });
-
+        getSettings();
     }//End on create
+
 
     @Override
     public void onSaveInstanceState(Bundle outState) {
@@ -238,7 +240,6 @@ public class setting extends AppCompatActivity {
     }
 
     public void loadPref(){
-        getSettings();
         SharedPreferences sharedPref = getSharedPreferences("preference",MODE_PRIVATE);
         silentMethod = sharedPref.getInt("userChoiceSpinner",0);
         if(silentMethod != 0) {
@@ -349,29 +350,34 @@ public class setting extends AppCompatActivity {
     }
 
     public void submit(View view) {
+        Toast.makeText(this,"saved", Toast.LENGTH_LONG).show();
         //set settings
          setSettings();
+         startActivity(new Intent(this , Home.class));
         //save preferences
 
 
     }
     public void setSettings(){
+        Toast.makeText(this,"seeeeet", Toast.LENGTH_LONG).show();
         int spinnerValue1= spinner1.getSelectedItemPosition();
-        int spinnerValue2= spinner1.getSelectedItemPosition();
-        int spinnerValue3= spinner1.getSelectedItemPosition();
-        int spinnerValue4= spinner1.getSelectedItemPosition();
-        int spinnerValue5= spinner1.getSelectedItemPosition();
-        SharedPreferences myPrefs = this.getSharedPreferences("settings", MODE_PRIVATE);
+        int spinnerValue2= spinner2.getSelectedItemPosition();
+        int spinnerValue3= spinner3.getSelectedItemPosition();
+        int spinnerValue4= spinner4.getSelectedItemPosition();
+        int spinnerValue5= spinner5.getSelectedItemPosition();
+        SharedPreferences myPrefs = getSharedPreferences("settings", MODE_PRIVATE);
         SharedPreferences.Editor prefsEditor = myPrefs.edit();
         prefsEditor.putInt("spinner1", spinnerValue1);
         prefsEditor.putInt("spinner2", spinnerValue2);
         prefsEditor.putInt("spinner3", spinnerValue3);
         prefsEditor.putInt("spinner4", spinnerValue4);
         prefsEditor.putInt("spinner5", spinnerValue5);
-
+        prefsEditor.commit();
+    System.out.println(spinnerValue1);
     }
     public void getSettings(){
-        SharedPreferences myPrefs = this.getSharedPreferences("settings", MODE_PRIVATE);
+
+        SharedPreferences myPrefs = getSharedPreferences("settings", MODE_PRIVATE);
         int spn1 = myPrefs.getInt("spinner1",0);
         int spn2 = myPrefs.getInt("spinner2",0);
         int spn3 = myPrefs.getInt("spinner3",0);
@@ -384,6 +390,7 @@ public class setting extends AppCompatActivity {
         spinner3.setSelection(spn3);
         spinner4.setSelection(spn4);
         spinner5.setSelection(spn5);
+        Toast.makeText(this,"geeeet"+spn1, Toast.LENGTH_LONG).show();
 
     }
 
