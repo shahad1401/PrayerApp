@@ -30,7 +30,7 @@ import java.util.Random;
 
 public class setting extends AppCompatActivity {
     DrawerLayout drawerLayout;
-   Spinner spinner1, spinner2, spinner3,spinner6;
+   Spinner spinner1, spinner2, spinner3,spinner4, spinner5,spinner6;
    Button btnSubmit;
   int calcMethod, asrMethod,timeMethod, silentMethod;
   Calendar c = Calendar.getInstance();
@@ -125,19 +125,52 @@ public class setting extends AppCompatActivity {
      }
  });
 
-        //Create Spinner 4 --------------------------------------------------------------------------------------
-
-        spinner6 = (Spinner) findViewById(R.id.spinner6);
+        //creating Spinner 4
+        spinner4 = (Spinner) findViewById(R.id.spinner4);
         List<String> list4 = new ArrayList<String>();
-        list4.add("غير صامت");
-        list4.add("15 دقيقة");
-        list4.add("30 دقيقة");
-        list4.add("45 دقيقة");
+        list4.add("لا يوجد تعديل");
+        list4.add("منتصف الليل");
+        list4.add("سبع الليل ");
+        list4.add("مستندة إلى الزاوية");
 
         ArrayAdapter<String> dataAdapter4 = new ArrayAdapter<String>(this,
                 android.R.layout.simple_spinner_item, list4);
         dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinner6.setAdapter(dataAdapter4);
+        spinner4.setAdapter(dataAdapter4);
+
+        //creating Spinner 5
+        spinner5 = (Spinner) findViewById(R.id.spinner5);
+        List<String> list5 = new ArrayList<String>();
+        list5.add("أقل ب ٥ دقائق");
+        list5.add("أقل ب ٤ دقائق");
+        list5.add("أقل ب ٣ دقائق");
+        list5.add("أقل بدقيقتين ");
+        list5.add("أقل بدقيقة");
+        list5.add("لا يوجد تعديل");
+        list5.add("أكثر ب ٥ دقائق");
+        list5.add("أكثر ب ٤ دقائق");
+        list5.add("أكثر ب ٣ دقائق");
+        list5.add("أكثر بدقيقتين");
+        list5.add("أكثر بدقيقة ");
+
+        ArrayAdapter<String> dataAdapter5 = new ArrayAdapter<String>(this,
+                android.R.layout.simple_spinner_item, list5);
+        dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinner5.setAdapter(dataAdapter5);
+
+        //Create Spinner 6--------------------------------------------------------------------------------------
+
+        spinner6 = (Spinner) findViewById(R.id.spinner6);
+        List<String> list6 = new ArrayList<String>();
+        list6.add("غير صامت");
+        list6.add("15 دقيقة");
+        list6.add("30 دقيقة");
+        list6.add("45 دقيقة");
+
+        ArrayAdapter<String> dataAdapter6 = new ArrayAdapter<String>(this,
+                android.R.layout.simple_spinner_item, list6);
+        dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinner6.setAdapter(dataAdapter6);
 
 
         spinner6.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
