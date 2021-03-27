@@ -90,6 +90,7 @@ String[] prayer;
         isha = findViewById(R.id.isha);
         //initialize fusedLocationProviderClient
         fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this);
+
         //__________________Did this my self so the location will be updated oninit ___________________________________
         //check permission
         if (ActivityCompat.checkSelfPermission(Home.this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
@@ -118,6 +119,19 @@ String[] prayer;
 //prayersTime(calcMethod,asrMethod,timeformat);
 
         drawerLayout = findViewById(R.id.drawer_layout);
+
+       boolean isExist= getIntent().getBooleanExtra("setting",false);
+       if(isExist){
+           timeformat= getIntent().getIntExtra("timeformat",0);
+           calcMethod = getIntent().getIntExtra("calcemethod",0);
+           asrMethod = getIntent().getIntExtra("asrMethod",0);
+           highlats=getIntent().getIntExtra("highlats",0);
+           offset= getIntent().getIntExtra("offset",0);
+           System.out.println("timeformat" + timeformat);
+       }
+
+        getLocation();
+
     } // end on create
 
     public void prayersTime(int calcmethod, int asrMethod, int timeformat , int highlats , int offset) {

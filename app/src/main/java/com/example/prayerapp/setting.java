@@ -352,10 +352,24 @@ public class setting extends AppCompatActivity {
     public void submit(View view) {
         Toast.makeText(this,"saved", Toast.LENGTH_LONG).show();
         //set settings
-        adjustPray();
+        //adjustPray();
+        Intent intent = new Intent(this , Home.class);
+        // int calcmethod, int asrMethod, int timeformat , int highlats , int offset
+        int spinnerValue1= spinner1.getSelectedItemPosition();
+        int spinnerValue2= spinner2.getSelectedItemPosition();
+        int spinnerValue3= spinner3.getSelectedItemPosition();
+        int spinnerValue4= spinner4.getSelectedItemPosition();
+        int spinnerValue5= spinner5.getSelectedItemPosition();
+        intent.putExtra("calcemethod",spinnerValue1);
+        intent.putExtra("asrMethod", spinnerValue2);
+        intent.putExtra("timeformat", spinnerValue3);
+        intent.putExtra("highlats", spinnerValue4);
+        intent.putExtra("offset", spinnerValue5);
+        intent.putExtra("setting",true);
+
         //save preferences
         setSettings();
-        startActivity(new Intent(this , Home.class));
+        startActivity(intent);
 
     }
 
@@ -365,6 +379,8 @@ public class setting extends AppCompatActivity {
         int spinnerValue3= spinner3.getSelectedItemPosition();
         int spinnerValue4= spinner4.getSelectedItemPosition();
         int spinnerValue5= spinner5.getSelectedItemPosition();
+
+        Log.i("spinner val 2",spinnerValue2+"");
 
         Home h = new Home();
         h.prayersTime(spinnerValue1,spinnerValue2,spinnerValue3,spinnerValue4,spinnerValue5);
