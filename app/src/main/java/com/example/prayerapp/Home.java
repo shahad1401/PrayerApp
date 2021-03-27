@@ -114,9 +114,6 @@ String[] prayer;
                 }
             }
         });
-
-//prayersTime(calcMethod,asrMethod,timeformat);
-
         drawerLayout = findViewById(R.id.drawer_layout);
     } // end on create
 

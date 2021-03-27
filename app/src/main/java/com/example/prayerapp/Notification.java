@@ -7,6 +7,7 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
+import android.service.notification.StatusBarNotification;
 import android.util.Log;
 
 import androidx.core.app.NotificationCompat;
@@ -27,6 +28,8 @@ public class Notification extends BroadcastReceiver {
 
     @Override
     public void onReceive(Context context, Intent intent) {
+
+        mNotifyManager = (NotificationManager) context.getSystemService(Context. NOTIFICATION_SERVICE ) ;
 
         //create channel
         createNotificationChannel(context);
@@ -51,8 +54,6 @@ public class Notification extends BroadcastReceiver {
     }
 
     public void createNotificationChannel(Context context) {
-
-        mNotifyManager = (NotificationManager) context.getSystemService(Context. NOTIFICATION_SERVICE ) ;
 
         if (android.os.Build.VERSION.SDK_INT >=
                 android.os.Build.VERSION_CODES.O) {
@@ -81,14 +82,25 @@ public class Notification extends BroadcastReceiver {
 
     }//End createNotificationCH
 
+    public void cancelIfExist(int id){
+        StatusBarNotification[] notifications = mNotifyManager.getActiveNotifications();
+        for (StatusBarNotification notification : notifications) {
+            if (notification.getId() == id) {
+                mNotifyManager.cancel(id);
+            }
+        }
+    }
+
     public void sendNotificationFajr(Context context) {
+        cancelIfExist(0);
         NotificationCompat.Builder notifyBuilder = getNotificationBuilder(context , FAJR_CHANNEL_ID);
-        mNotifyManager.notify(random.nextInt(9999 - 1000) + 1000, notifyBuilder.build());
+        mNotifyManager.notify(0, notifyBuilder.build());
     }//End Send notification
 
     public void sendNotificationDuhur(Context context){
+        cancelIfExist(1);
         NotificationCompat.Builder notifyBuilder = getNotificationBuilder(context , DUHUR_CHANNEL_ID);
-        mNotifyManager.notify(random.nextInt(9999 - 1000) + 1000, notifyBuilder.build());
+        mNotifyManager.notify(1, notifyBuilder.build());
     }
 
     public  NotificationCompat.Builder getNotificationBuilder(Context context , String channel){
