@@ -41,10 +41,10 @@ public class Notification extends BroadcastReceiver {
 
         switch(name){
             case "Fajr":
-                sendNotificationFajr(context);
+                sendNotification(context , FAJR_CHANNEL_ID , 0 );
                 break;
             case "Dhuhr":
-                sendNotificationDuhur(context);
+                sendNotification(context, DUHUR_CHANNEL_ID , 1 );
                 break;
             default:
                 Log.e("error" , "error in send !!!");
@@ -82,27 +82,26 @@ public class Notification extends BroadcastReceiver {
 
     }//End createNotificationCH
 
-    public void cancelIfExist(int id){
-        StatusBarNotification[] notifications = mNotifyManager.getActiveNotifications();
-        Log.i("notification size" , ""+notifications.length);
-        for (StatusBarNotification notification : notifications) {
-            if (notification.getId() == id) {
-                mNotifyManager.cancel(id);
-            }
+//    public void cancelIfExist(int id){
+//        StatusBarNotification[] notifications = mNotifyManager.getActiveNotifications();
+//        Log.i("notification size" , ""+notifications.length);
+//        for (StatusBarNotification notification : notifications) {
+//            if (notification.getId() == id) {
+//                mNotifyManager.cancel(id);
+//            }
+//        }
+//    }
+
+    public void sendNotification(Context context , String channel , int id) {
+        try{
+            mNotifyManager.cancel(id);
+        }catch(Exception e){
+            Log.e("Problemoo" , "id problem");
         }
-    }
 
-    public void sendNotificationFajr(Context context) {
-        cancelIfExist(0);
-        NotificationCompat.Builder notifyBuilder = getNotificationBuilder(context , FAJR_CHANNEL_ID);
-        mNotifyManager.notify(0, notifyBuilder.build());
+        NotificationCompat.Builder notifyBuilder = getNotificationBuilder(context , channel);
+        mNotifyManager.notify(id, notifyBuilder.build());
     }//End Send notification
-
-    public void sendNotificationDuhur(Context context){
-        cancelIfExist(1);
-        NotificationCompat.Builder notifyBuilder = getNotificationBuilder(context , DUHUR_CHANNEL_ID);
-        mNotifyManager.notify(1, notifyBuilder.build());
-    }
 
     public NotificationCompat.Builder getNotificationBuilder(Context context , String channel){
 
