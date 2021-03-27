@@ -327,38 +327,40 @@ String[] prayer;
         //fajr notification
         Log.i("notify" , "Notify");
         Log.i("size" , ""+times.size());
+
+        //----------------------------------------------------------
+        //fajr notification
+
         for (int i=0 ; i< 7 ; i++){
-
-            if(i!=1 && i!=4){
-
+            if (i!=2 || i!=4){
                 Log.i(times.get(i) , names.get(i));
 
                 String hour = times.get(i).substring(0,2);
                 String min = times.get(i).substring(3,5);
-
                 int ihour = parseInt(hour);
                 int imin = parseInt(min);
-                Log.i(hour , "hour");
+
+                Log.i("hour" , ""+ihour);
+                Log.i("min" , ""+imin);
 
                 c.setTimeInMillis(System.currentTimeMillis());
                 c.set(Calendar.HOUR_OF_DAY, ihour);
-                c.set(Calendar.MINUTE, imin); // prayerTimeNotify
-                // to update time use java.awt.event
+                c.set(Calendar.MINUTE, imin);
 
                 long delay = c.getTimeInMillis();
 
                 Intent intent = new Intent(this, Notification.class);
                 intent.putExtra("name", names.get(i));
+                intent.putExtra("time",times.get(i));
 
                 PendingIntent pendingIntent = PendingIntent.getBroadcast(this, random.nextInt(9999 - 1000) + 1000,  intent, PendingIntent.FLAG_UPDATE_CURRENT);
 
-                AlarmManager alarmManager = (AlarmManager) getSystemService(Context. ALARM_SERVICE ) ;
+                AlarmManager alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE ) ;
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
                     alarmManager.setExact(AlarmManager.RTC_WAKEUP  , delay , pendingIntent) ;
                 }
             }
         }
-
     }
 
 
