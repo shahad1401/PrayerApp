@@ -7,6 +7,7 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
+import android.os.Build;
 import android.service.notification.StatusBarNotification;
 import android.util.Log;
 
@@ -32,6 +33,7 @@ public class Notification extends BroadcastReceiver {
         mNotifyManager = (NotificationManager) context.getSystemService(Context. NOTIFICATION_SERVICE ) ;
 
         //create channel
+        clearN();
         createNotificationChannel(context);
 
         name = intent.getStringExtra("name");
@@ -91,6 +93,15 @@ public class Notification extends BroadcastReceiver {
 //            }
 //        }
 //    }
+
+    public void clearN(){
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            mNotifyManager.deleteNotificationChannel(FAJR_CHANNEL_ID);
+            Log.i("insdie sdk if","");
+        }
+
+
+    }
 
     public void sendNotification(Context context , String channel , int id) {
         try{
