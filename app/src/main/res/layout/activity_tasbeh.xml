@@ -1,12 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.drawerlayout.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.drawerlayout.widget.DrawerLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".Tasbeh"
     android:id="@+id/drawer_layout"
-    android:background="@drawable/gradient">
+    android:background="@drawable/gradient"
+    >
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -14,13 +16,82 @@
 
         <include layout="@layout/main_toolbar"></include>
 
-        <TextView
+        <LinearLayout
+            android:gravity="center"
+            android:orientation="vertical"
+            android:layout_gravity="center"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:text="@string/tasbeeh"
-            android:textSize="50sp"
-            android:gravity="center">
-        </TextView>
+            android:layout_height="match_parent">
+
+            <TextSwitcher
+                android:id="@+id/tasbeehText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:text="@string/tasbeeh"
+                android:textSize="150sp"></TextSwitcher>
+            <LinearLayout
+                android:layout_marginTop="25dp"
+                android:layout_gravity="center"
+                android:background="@drawable/bak"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+            <TextView
+                android:background="#ffffff"
+                android:id="@+id/tasbeehCount"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="0"
+                android:textStyle="bold"
+                android:minWidth="160dp"
+                android:layout_gravity="center"
+                android:layout_marginTop="48dp"
+                android:textSize="50sp"
+                android:gravity="right">
+            </TextView>
+            <LinearLayout
+                android:gravity="center"
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <Button
+                    android:layout_margin="10dp"
+                    android:onClick="Reset"
+                    android:id="@+id/btnReset"
+                    android:background="@drawable/round_button"
+                    android:text="إعادة ضبط"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"/>
+                <Button
+                    android:layout_margin="10dp"
+                    android:onClick="ChangeDuya"
+                    android:id="@+id/btnChangeDuya"
+                    android:background="@drawable/round_button"
+                    android:text="تغيير الدعاء"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"/>
+
+
+            </LinearLayout>
+            <Button
+                android:background="@drawable/round_button"
+                android:id="@+id/btCount"
+                android:onClick="Count"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:gravity="center"
+                android:textAllCaps="false"
+                android:textAlignment="center"
+                android:textSize="26dp"
+                android:textStyle="bold"
+                android:text="احسب"
+                android:layout_gravity="center"/>
+            </LinearLayout>
+        </LinearLayout>
+
+
     </LinearLayout>
 
     <RelativeLayout
