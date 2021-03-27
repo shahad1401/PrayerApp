@@ -352,7 +352,7 @@ public class setting extends AppCompatActivity {
     public void submit(View view) {
         Toast.makeText(this,"saved", Toast.LENGTH_LONG).show();
         //set settings
-        adjustPray();
+        //adjustPray();
         //save preferences
         setSettings();
         startActivity(new Intent(this , Home.class));
