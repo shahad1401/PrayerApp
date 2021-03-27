@@ -48,7 +48,7 @@ import static java.lang.Integer.parseInt;
 
 public class Home extends AppCompatActivity {
 
-    public static int timeformat=1 , calcMethod=4, asrMethod=0 , highlats=0 , offset=0;
+    public static int timeformat=0 , calcMethod=0, asrMethod=0 , highlats=1 , offset=0;
     //initialize variable
     Button btLocation;
     static double lat;
@@ -123,13 +123,15 @@ String[] prayer;
     public void prayersTime(int calcmethod, int asrMethod, int timeformat , int highlats , int offset) {
         PrayTime prayers = new PrayTime();
 
+        Log.i("Prayers :","Prayers");
+
         prayers.setTimeFormat(timeformat); // 12 (1)
         prayers.setCalcMethod(calcmethod); //um alqora 4
-        //Log.i("calc method",prayers.getCalcMethod()+"");
+        Log.i("calc method",prayers.getCalcMethod()+"");
         prayers.setAsrJuristic(asrMethod); // Shafii (standard) (0)
-       // Log.i("AsrJuristic method",prayers.getAsrJuristic()+"");
+        Log.i("AsrJuristic method",prayers.getAsrJuristic()+"");
         prayers.setAdjustHighLats(highlats); //none
-        //Log.i("AdjustHighLats method",prayers.getAdjustHighLats()+"");
+        Log.i("AdjustHighLats method",prayers.getAdjustHighLats()+"");
         int[] offsets = {offset, offset, offset, offset, offset, offset, offset}; // {Fajr,Sunrise,Dhuhr,Asr,Sunset,Maghrib,Isha}
         prayers.tune(offsets);
 
