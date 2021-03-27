@@ -7,9 +7,11 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
+import android.os.Build;
 import android.service.notification.StatusBarNotification;
 import android.util.Log;
 
+import androidx.annotation.RequiresApi;
 import androidx.core.app.NotificationCompat;
 
 import java.util.Calendar;
@@ -17,114 +19,41 @@ import java.util.Random;
 
 public class Notification extends BroadcastReceiver {
 
-    String time,name;
-    private static final String FAJR_CHANNEL_ID = "ch1";
-    private static final String DUHUR_CHANNEL_ID = "ch2";
+    int id=0;
+    private static final String ATHKAR_CHANNEL_ID = "ch1";
+    NotificationManager mNotifyManager;
 
-    private NotificationManager mNotifyManager;
-    public Calendar c;
-    Random random = new Random();
-    public int m = random.nextInt(9999 - 1000) + 1000;
-
+    @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     public void onReceive(Context context, Intent intent) {
+        // TODO Auto-generated method stub
 
-        mNotifyManager = (NotificationManager) context.getSystemService(Context. NOTIFICATION_SERVICE ) ;
+        mNotifyManager = (NotificationManager) context.getSystemService(Context. NOTIFICATION_SERVICE );
 
-        //create channel
-        createNotificationChannel(context);
+        NotificationChannel AthkarChannel = new NotificationChannel(ATHKAR_CHANNEL_ID,
+                "Reminder Notification", NotificationManager.IMPORTANCE_HIGH);
+        AthkarChannel.enableLights(true);
+        AthkarChannel.setLightColor(Color.RED);
+        AthkarChannel.enableVibration(true);
+        AthkarChannel.setDescription("fajr prayer");
+        mNotifyManager.createNotificationChannel(AthkarChannel);
 
-        name = intent.getStringExtra("name");
-        time = intent.getStringExtra("time");
+        long when = System.currentTimeMillis();
+        NotificationManager notificationManager = (NotificationManager) context
+                .getSystemService(Context.NOTIFICATION_SERVICE);
 
-        //Send the notification
+        Intent notificationIntent = new Intent(context, Athkar.class);
+        notificationIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 
-        switch(name){
-            case "Fajr":
-                sendNotification(context , FAJR_CHANNEL_ID , 0 );
-                break;
-            case "Dhuhr":
-                sendNotification(context, DUHUR_CHANNEL_ID , 1 );
-                break;
-            default:
-                Log.e("error" , "error in send !!!");
+        PendingIntent pendingIntent = PendingIntent.getActivity(context, 0,
+                notificationIntent, PendingIntent.FLAG_UPDATE_CURRENT);
 
-        }
-
+        NotificationCompat.Builder mNotifyBuilder = new NotificationCompat.Builder(context, ATHKAR_CHANNEL_ID).setSmallIcon(R.drawable.ic_andriod)
+                .setContentTitle("Alarm Fired")
+                .setContentText("Events to be Performed")
+                .setAutoCancel(true).setWhen(when)
+                .setContentIntent(pendingIntent);
+        notificationManager.notify(id, mNotifyBuilder.build());
+        id++;
     }
-
-    public void createNotificationChannel(Context context) {
-
-        if (android.os.Build.VERSION.SDK_INT >=
-                android.os.Build.VERSION_CODES.O) {
-
-            // Create a fajer Channel
-            NotificationChannel fajrChannel = new NotificationChannel(FAJR_CHANNEL_ID,
-                    "Reminder Notification", NotificationManager
-                    .IMPORTANCE_HIGH);//-------------------------------------------------------------->CHANGE MASCOT
-            fajrChannel.enableLights(true);
-            fajrChannel.setLightColor(Color.RED);
-            fajrChannel.enableVibration(true);
-            fajrChannel.setDescription("fajr prayer");//---------------->Change Mascot
-            mNotifyManager.createNotificationChannel(fajrChannel);
-
-            //create duhur Channel
-
-            NotificationChannel duhurChannel = new NotificationChannel(DUHUR_CHANNEL_ID,
-                    "Reminder Notification", NotificationManager
-                    .IMPORTANCE_HIGH);//-------------------------------------------------------------->CHANGE MASCOT
-            duhurChannel.enableLights(true);
-            duhurChannel.setLightColor(Color.RED);
-            duhurChannel.enableVibration(true);
-            duhurChannel.setDescription("Duhur prayer");//---------------->Change Mascot
-            mNotifyManager.createNotificationChannel(duhurChannel);
-        }
-
-    }//End createNotificationCH
-
-//    public void cancelIfExist(int id){
-//        StatusBarNotification[] notifications = mNotifyManager.getActiveNotifications();
-//        Log.i("notification size" , ""+notifications.length);
-//        for (StatusBarNotification notification : notifications) {
-//            if (notification.getId() == id) {
-//                mNotifyManager.cancel(id);
-//            }
-//        }
-//    }
-
-    public void sendNotification(Context context , String channel , int id) {
-        try{
-            mNotifyManager.cancel(id);
-        }catch(Exception e){
-            Log.e("Problemoo" , "id problem");
-        }
-
-        NotificationCompat.Builder notifyBuilder = getNotificationBuilder(context , channel);
-        mNotifyManager.notify(id, notifyBuilder.build());
-    }//End Send notification
-
-    public NotificationCompat.Builder getNotificationBuilder(Context context , String channel){
-
-        Intent notifyIntent = new Intent(context, Home.class);
-        //add details of reminder to the notification
-        notifyIntent.putExtra("name",name);
-        notifyIntent.putExtra("time",time);
-
-// Set the Activity to start in a new, empty task
-        notifyIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK
-                | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-
-// Create the PendingIntent
-        PendingIntent notifyPendingIntent = PendingIntent.getActivity(
-                context, random.nextInt(9999 - 1000) + 1000, notifyIntent, PendingIntent.FLAG_UPDATE_CURRENT
-        );
-
-        NotificationCompat.Builder notifyBuilder = new NotificationCompat.Builder(context, channel)
-                .setContentTitle(name)
-                .setContentText("Prayer reminder")
-                .setSmallIcon(R.drawable.ic_andriod)
-                .setContentIntent(notifyPendingIntent)
-                .setAutoCancel(true);
-        return notifyBuilder;
-    }//end getNotificationBuilder
 }

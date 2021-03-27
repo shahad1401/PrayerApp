@@ -128,6 +128,7 @@ String[] prayer;
        }
 
         getLocation();
+        createNotification();
 
     } // end on create
 
@@ -174,8 +175,6 @@ String[] prayer;
 //        //isha
 //        prayerTimesNotify.add(prayerTimes.get(6));
 //        prayerNamesNotify.add(prayerNames.get(6));
-
-        createNotification(prayerNames,prayerTimes);
 
         //setting the values on the screen
         fajr.setText(prayerNames.get(0)+": "+ prayerTimes.get(0));
@@ -319,45 +318,15 @@ String[] prayer;
         closeDrawer(drawerLayout);
     }
 
-    public void createNotification(ArrayList<String> names , ArrayList<String> times){
-
-        //fajr notification
-        Log.i("notify" , "Notify");
-        Log.i("size" , ""+times.size());
-
-        //----------------------------------------------------------
-        //fajr notification
-
-        for (int i=0 ; i< 7 ; i++){
-            if (i!=2 || i!=4){
-                Log.i(times.get(i) , names.get(i));
-
-                String hour = times.get(i).substring(0,2);
-                String min = times.get(i).substring(3,5);
-                int ihour = parseInt(hour);
-                int imin = parseInt(min);
-
-                Log.i("hour" , ""+ihour);
-                Log.i("min" , ""+imin);
-
-                c.setTimeInMillis(System.currentTimeMillis());
-                c.set(Calendar.HOUR_OF_DAY, ihour);
-                c.set(Calendar.MINUTE, imin);
-
-                long delay = c.getTimeInMillis();
-
-                Intent intent = new Intent(this, Notification.class);
-                intent.putExtra("name", names.get(i));
-                intent.putExtra("time",times.get(i));
-
-                PendingIntent pendingIntent = PendingIntent.getBroadcast(this, random.nextInt(9999 - 1000) + 1000,  intent, PendingIntent.FLAG_UPDATE_CURRENT);
-
-                AlarmManager alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE ) ;
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-                    alarmManager.setExact(AlarmManager.RTC_WAKEUP  , delay , pendingIntent) ;
-                }
-            }
-        }
+    public void createNotification(){
+        Calendar calendar = Calendar.getInstance();
+        calendar.set(Calendar.HOUR_OF_DAY, 6);
+        calendar.set(Calendar.MINUTE, 0);
+        calendar.set(Calendar.SECOND, 0);
+        Intent intent1 = new Intent(Home.this, Notification.class);
+        PendingIntent pendingIntent = PendingIntent.getBroadcast(Home.this, 0,intent1, PendingIntent.FLAG_UPDATE_CURRENT);
+        AlarmManager am = (AlarmManager) Home.this.getSystemService(Home.this.ALARM_SERVICE);
+        am.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), AlarmManager.INTERVAL_DAY, pendingIntent);
     }
 
 
