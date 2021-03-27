@@ -84,6 +84,7 @@ public class Notification extends BroadcastReceiver {
 
     public void cancelIfExist(int id){
         StatusBarNotification[] notifications = mNotifyManager.getActiveNotifications();
+        Log.i("notification size" , ""+notifications.length);
         for (StatusBarNotification notification : notifications) {
             if (notification.getId() == id) {
                 mNotifyManager.cancel(id);
@@ -103,7 +104,7 @@ public class Notification extends BroadcastReceiver {
         mNotifyManager.notify(1, notifyBuilder.build());
     }
 
-    public  NotificationCompat.Builder getNotificationBuilder(Context context , String channel){
+    public NotificationCompat.Builder getNotificationBuilder(Context context , String channel){
 
         Intent notifyIntent = new Intent(context, Home.class);
         //add details of reminder to the notification
