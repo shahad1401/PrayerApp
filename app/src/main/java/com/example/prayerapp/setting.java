@@ -201,19 +201,16 @@ public class setting extends AppCompatActivity {
                         delay = (long) 60000;
                         setTime(delay);
                         savePref(silentMethod);
-                        Toast.makeText(getApplicationContext() , "تم تشغيل الوضع الصامت ل 15 دقيقة", Toast.LENGTH_LONG).show();
                         break;
                     case 2://30 minutes
                         delay = (long) 900000*2;
                         setTime(delay);
                         savePref(silentMethod);
-                        Toast.makeText(getApplicationContext() , "تم تشغيل الوضع الصامت ل 30 دقيقة", Toast.LENGTH_LONG).show();
                         break;
                     case 3: //45 minutes
                         delay = (long) 2700000;
                         setTime(delay);
                         savePref(silentMethod);
-                        Toast.makeText(getApplicationContext() , "تم تشغيل الوضع الصامت ل 45 دقيقة", Toast.LENGTH_LONG).show();
                         break;
 
                     default :
@@ -413,7 +410,6 @@ public class setting extends AppCompatActivity {
 
 
     public void setSettings(){
-        Toast.makeText(this,"seeeeet", Toast.LENGTH_LONG).show();
         int spinnerValue1= spinner1.getSelectedItemPosition();
         int spinnerValue2= spinner2.getSelectedItemPosition();
         int spinnerValue3= spinner3.getSelectedItemPosition();
@@ -444,7 +440,6 @@ public class setting extends AppCompatActivity {
         spinner3.setSelection(spn3);
         spinner4.setSelection(spn4);
         spinner5.setSelection(spn5);
-        Toast.makeText(this,"geeeet"+spn1, Toast.LENGTH_LONG).show();
 
     }
 
