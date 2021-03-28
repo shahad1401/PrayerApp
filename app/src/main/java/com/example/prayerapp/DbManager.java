@@ -58,4 +58,17 @@ public class DbManager extends SQLiteOpenHelper{
         else
             return  false;
     }
+
+    public boolean checkExist(String username){
+        String[] columns = { col2 };
+        String selection = col2 + " =?";
+        String[] selectionArgs = { username };
+        String limit = "1";
+        SQLiteDatabase db = getReadableDatabase();
+
+        Cursor cursor = db.query(tName, columns, selection, selectionArgs, null, null, null, limit);
+        boolean exists = (cursor.getCount() > 0);
+        cursor.close();
+        return exists;
+    }
 }
