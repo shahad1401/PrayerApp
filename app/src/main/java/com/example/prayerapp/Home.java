@@ -283,7 +283,7 @@ String[] prayer;
         redirectActivity(this , setting.class );
     }
 
-    public static void logout(final Activity activity) {
+    public void logout(final Activity activity) {
         AlertDialog.Builder builder = new AlertDialog.Builder(activity);
         builder.setTitle("تسجيل الخروج");
         builder.setMessage("هل تريد تسجيل الخروج؟");
@@ -292,7 +292,8 @@ String[] prayer;
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
                 activity.finishAffinity();
-                System.exit(0);
+                Intent intent = new Intent(Home.this, Login.class);
+                startActivity(intent);
             }
         });
 
