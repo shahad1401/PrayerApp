@@ -49,28 +49,28 @@ public class Register extends AppCompatActivity {
                 String cpwd = confpass.getText().toString().trim();
 
                 if (!isEmail(user)){
-                    Toast.makeText(Register.this,"not email format",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(Register.this,"صيغة خاطئة للبريد الالكتروني",Toast.LENGTH_SHORT).show();
                 } else {
                     if (db.checkExist(user)){
-                        Toast.makeText(Register.this,"already exist",Toast.LENGTH_SHORT).show();
+                        Toast.makeText(Register.this,"البريد الالكتروني موجود سابقا",Toast.LENGTH_SHORT).show();
                     }else {
                         if (pwd.length() < 8){
-                            Toast.makeText(Register.this,"short password",Toast.LENGTH_SHORT).show();
+                            Toast.makeText(Register.this,"كلمة السر قصيرة ، يجب ان تكون اطول من 8 أحرف",Toast.LENGTH_SHORT).show();
                         }else {
                             if(pwd.equals(cpwd)){
                                 long val = db.addUser(user,pwd);
                                 if(val > 0){
-                                    Toast.makeText(Register.this,"You have registered",Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(Register.this,"تم إنشاء الحساب بنجاح",Toast.LENGTH_SHORT).show();
                                     Intent moveToLogin = new Intent(Register.this,Login.class);
                                     startActivity(moveToLogin);
                                 }
                                 else{
-                                    Toast.makeText(Register.this,"Registeration Error",Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(Register.this,"خطأ في انشاء الحساب",Toast.LENGTH_SHORT).show();
                                 }
 
                             }
                             else{
-                                Toast.makeText(Register.this,"Password is not matching",Toast.LENGTH_SHORT).show();
+                                Toast.makeText(Register.this,"كلمة السر لا تطابق التأكيد",Toast.LENGTH_SHORT).show();
                             }
                         }
                     }

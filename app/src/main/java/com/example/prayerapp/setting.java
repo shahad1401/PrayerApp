@@ -198,7 +198,7 @@ public class setting extends AppCompatActivity {
                        // Toast.makeText(getApplicationContext() , "تم إيقاف الوضع الصامت", Toast.LENGTH_LONG).show();
                        // break;
                     case 1:// 15 minutes 900000
-                        delay = (long) 60000;
+                        delay = (long) 900000;
                         setTime(delay);
                         savePref(silentMethod);
                         break;

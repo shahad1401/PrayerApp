@@ -49,7 +49,7 @@ public class Login extends AppCompatActivity {
                 }
                 else
                 {
-                    Toast.makeText(Login.this,"Error in email or password",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(Login.this,"خطأ في البريد الالكتروني أو كلمة السر",Toast.LENGTH_SHORT).show();
                 }
             }
         });
