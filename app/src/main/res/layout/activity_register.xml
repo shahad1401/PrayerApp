@@ -44,7 +44,7 @@
         android:layout_height="wrap_content"
         android:autofillHints="text here"
         android:hint="@string/password_ar"
-        android:inputType="textUri"
+        android:inputType="textPassword"
         android:textColor="@color/white"
         android:textColorHint="@color/white"
         android:backgroundTint="@color/white"></EditText>
@@ -55,7 +55,7 @@
         android:layout_height="wrap_content"
         android:autofillHints="text here"
         android:hint="@string/c_pass_ar"
-        android:inputType="textUri"
+        android:inputType="textPassword"
         android:textColor="@color/white"
         android:textColorHint="@color/white"
         android:backgroundTint="@color/white"></EditText>
