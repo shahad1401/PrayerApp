@@ -4,7 +4,9 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.drawerlayout.widget.DrawerLayout;
 
+import android.app.Activity;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -19,7 +21,7 @@ public class Tasbeh extends AppCompatActivity {
      long  COUNT = 0 ;
      TextView textView;
      TextSwitcher textSwitcher;
-     String[] Tesbeeh = {"سبحان الله","الحمد لله","الله وأكبر","لا إله إلا الله وحده لا شريك له "};
+     String[] Tesbeeh = {"سبحان الله","الحمد لله","الله أكبر","لا إله إلا الله وحده لا شريك له "};
      int currentIndex = 0 ;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,8 +63,30 @@ ChangeDuya();
         Home.redirectActivity(this, Athkar.class);
     }
 
-    public void logout(View view){
-        Home.logout(this);
+    public void clickLogOut(View view){
+        logout(this);
+    }
+    public void logout(final Activity activity) {
+        android.app.AlertDialog.Builder builder = new android.app.AlertDialog.Builder(activity);
+        builder.setTitle("تسجيل الخروج");
+        builder.setMessage("هل تريد تسجيل الخروج؟");
+
+        builder.setPositiveButton("نعم", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                activity.finishAffinity();
+                Intent intent = new Intent(Tasbeh.this, Login.class);
+                startActivity(intent);
+            }
+        });
+
+        builder.setNegativeButton("لا", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int i) {
+                dialog.dismiss();
+            }
+        });
+        builder.show();
     }
 
     public void clickSetting(View view){

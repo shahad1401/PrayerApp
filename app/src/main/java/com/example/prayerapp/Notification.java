@@ -35,7 +35,7 @@ public class Notification extends BroadcastReceiver {
         AthkarChannel.enableLights(true);
         AthkarChannel.setLightColor(Color.RED);
         AthkarChannel.enableVibration(true);
-        AthkarChannel.setDescription("fajr prayer");
+        AthkarChannel.setDescription("prayer");
         mNotifyManager.createNotificationChannel(AthkarChannel);
 
         long when = System.currentTimeMillis();
@@ -48,9 +48,9 @@ public class Notification extends BroadcastReceiver {
         PendingIntent pendingIntent = PendingIntent.getActivity(context, 0,
                 notificationIntent, PendingIntent.FLAG_UPDATE_CURRENT);
 
-        NotificationCompat.Builder mNotifyBuilder = new NotificationCompat.Builder(context, ATHKAR_CHANNEL_ID).setSmallIcon(R.drawable.ic_andriod)
-                .setContentTitle("Alarm Fired")
-                .setContentText("Events to be Performed")
+        NotificationCompat.Builder mNotifyBuilder = new NotificationCompat.Builder(context, ATHKAR_CHANNEL_ID).setSmallIcon(R.mipmap.ic_launcher_round)
+                .setContentTitle("تطبيق الصلاة")
+                .setContentText("ابدأ يومك بأذكار الصباح واختم بأذكار المساء")
                 .setAutoCancel(true).setWhen(when)
                 .setContentIntent(pendingIntent);
         notificationManager.notify(id, mNotifyBuilder.build());
